@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import RakhiSelection from '../components/RakhiSelection'
 import WishForm from '../components/WishForm'
 import WishPreview from '../components/WishPreview'
@@ -24,6 +25,7 @@ function CreateWishPage({
   onMessageChange,
   onCreateWish,
 }: CreateWishPageProps) {
+  const navigate = useNavigate()
   const isFormValid =
     selectedRakhi !== null &&
     recipientName.trim().length > 0 &&
@@ -34,6 +36,15 @@ function CreateWishPage({
       {/* Header */}
       <header className="page-header animate-fade-in">
         <div className="container page-header__inner">
+          <button
+            className="page-header__back"
+            onClick={() => navigate(-1)}
+            aria-label="Go back"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
           <a href="/" className="page-header__logo" aria-label="Rakhi Wish">
             Rakhi Wish
           </a>

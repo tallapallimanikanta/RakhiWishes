@@ -50,9 +50,29 @@
   gap: var(--space-2);
 }
 
-.page-header__logo-icon {
+.page-header__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-all);
+  flex-shrink: 0;
+}
+
+.page-header__back:hover {
+  border-color: var(--color-rakhi-pink-light);
   color: var(--color-rakhi-pink);
-  font-size: var(--text-lg);
+}
+
+.page-header__back:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 2px;
 }
 
 /* ── Create Section ── */
