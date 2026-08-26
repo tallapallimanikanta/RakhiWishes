@@ -78,7 +78,7 @@ function LetterBack({ selectedRakhi, recipientName, message }: LetterBackProps) 
 
       {/* Branding */}
       <p className="letter-back__brand letter-back__reveal letter-back__reveal--5">
-        Sent with love via RakhiWishes
+        Sent with love via Rakhi Wish
       </p>
 
       {/* Small Rakhi */}

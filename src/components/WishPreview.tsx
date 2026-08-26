@@ -100,7 +100,7 @@ function WishPreview({ selectedRakhi, recipientName, message }: WishPreviewProps
 
           {/* Branding */}
           <p className="preview-card__brand">
-            Sent with love via RakhiWishes
+            Sent with love via Rakhi Wish
           </p>
         </div>
       </div>
