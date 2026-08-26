@@ -1,10 +1,21 @@
+import { useState, useCallback } from 'react'
 import StepHeader from '../components/StepHeader'
 import WishPreview from '../components/WishPreview'
+import EnvelopeAnimation from '../components/EnvelopeAnimation'
 import { useCreateFlow } from '../App'
 import './StepPage.css'
 
 function PreviewPage() {
-  const { selectedRakhi, recipientName, senderName, message, showLetter } = useCreateFlow()
+  const { selectedRakhi, recipientName, senderName, message, createAndShare } = useCreateFlow()
+  const [showEnvelope, setShowEnvelope] = useState(false)
+
+  const handlePost = useCallback(() => {
+    setShowEnvelope(true)
+  }, [])
+
+  const handleEnvelopeComplete = useCallback(() => {
+    createAndShare()
+  }, [createAndShare])
 
   return (
     <main className="step-page">
@@ -21,12 +32,16 @@ function PreviewPage() {
         <div className="step-page__action">
           <button
             className="btn btn-primary btn-lg"
-            onClick={showLetter}
+            onClick={handlePost}
           >
             Post the Letter
           </button>
         </div>
       </div>
+
+      {showEnvelope && (
+        <EnvelopeAnimation onComplete={handleEnvelopeComplete} />
+      )}
     </main>
   )
 }
