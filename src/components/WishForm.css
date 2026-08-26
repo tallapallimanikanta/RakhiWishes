@@ -70,6 +70,41 @@
    Preset Messages
    ============================================ */
 
+/* ── Preset Header with Translate ── */
+
+.preset-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+/* ── Language Selector ── */
+
+.translate-lang {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.translate-select {
+  font-size: var(--text-xs);
+  padding: 2px 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  outline: none;
+}
+
+.translate-select:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 1px;
+}
+
 /* ── Category Tabs ── */
 
 .preset-tabs {
@@ -148,14 +183,11 @@
 
 .preset-card {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4);
+  align-items: stretch;
   background: var(--color-bg-surface);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-lg);
-  cursor: pointer;
-  text-align: left;
+  overflow: hidden;
   transition:
     border-color var(--duration-fast) var(--ease-default),
     box-shadow var(--duration-fast) var(--ease-default),
@@ -169,13 +201,24 @@
   box-shadow: var(--shadow-sm);
 }
 
-.preset-card:focus-visible {
+.preset-card:focus-within {
   outline: 2px solid var(--color-rakhi-pink);
   outline-offset: 2px;
 }
 
-.preset-card:active {
-  background: rgba(217, 79, 122, 0.04);
+/* ── Card Body (clickable part) ── */
+
+.preset-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  min-width: 0;
 }
 
 .preset-card__label {
@@ -192,6 +235,16 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.preset-card__translated-badge {
+  font-size: 10px;
+  font-weight: var(--weight-semibold);
+  color: var(--color-rakhi-pink);
+  background: rgba(217, 79, 122, 0.08);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  width: fit-content;
 }
 
 .preset-card__action {
@@ -212,6 +265,45 @@
   transform: translateX(0);
 }
 
+/* ── Translate Button ── */
+
+.preset-card__translate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-height: 100%;
+  border: none;
+  border-left: 1px solid var(--color-border-light);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default);
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-2);
+}
+
+.preset-card__translate:hover {
+  background: rgba(217, 79, 122, 0.08);
+  color: var(--color-rakhi-pink);
+}
+
+.preset-card__translate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preset-card__translate-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-rakhi-pink);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
 /* ── Selected State ── */
 
 .preset-card--selected {
@@ -229,4 +321,8 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

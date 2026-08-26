@@ -4,6 +4,7 @@ import {
   presetMessages,
   type PresetCategory,
 } from '../data/presetMessages'
+import { translateText, languages } from '../utils/translate'
 import './WishForm.css'
 
 /* ── Validation constants ── */
@@ -30,6 +31,9 @@ function WishForm({
   const [activeCategory, setActiveCategory] = useState<PresetCategory | null>(null)
   const [nameTouched, setNameTouched] = useState(false)
   const [messageTouched, setMessageTouched] = useState(false)
+  const [targetLang, setTargetLang] = useState('hi')
+  const [translatedTexts, setTranslatedTexts] = useState<Record<string, string>>({})
+  const [translatingId, setTranslatingId] = useState<string | null>(null)
 
   /* ── Derived state ── */
   const trimmedName = recipientName.trim()
@@ -55,7 +59,6 @@ function WishForm({
 
   /* ── Handlers ── */
   const handleNameChange = (value: string) => {
-    // Allow typing but enforce max length at the field level
     if (value.length <= MESSAGE_MAX_LENGTH) {
       onRecipientNameChange(value)
     }
@@ -80,6 +83,28 @@ function WishForm({
     setMessageTouched(true)
   }
 
+  const handleTranslate = async (presetId: string, text: string) => {
+    const cacheKey = `${presetId}_${targetLang}`
+
+    // If already translated, use it
+    if (translatedTexts[cacheKey]) {
+      handlePresetSelect(translatedTexts[cacheKey])
+      return
+    }
+
+    setTranslatingId(presetId)
+    try {
+      const result = await translateText(text, targetLang)
+      setTranslatedTexts((prev) => ({ ...prev, [cacheKey]: result }))
+      handlePresetSelect(result)
+    } catch {
+      // On error, use original
+      handlePresetSelect(text)
+    } finally {
+      setTranslatingId(null)
+    }
+  }
+
   return (
     <section className="wish-form" aria-labelledby="wish-form-title">
       <div className="section-header animate-fade-in-up">
@@ -92,7 +117,7 @@ function WishForm({
         {/* ── Recipient Name ── */}
         <div className="wish-form__field animate-fade-in-up delay-1">
           <label htmlFor="recipient-name" className="label">
-To
+            To
             <span className="label__required" aria-hidden="true">*</span>
           </label>
           <input
@@ -136,7 +161,34 @@ To
 
         {/* ── Preset Messages ── */}
         <div className="wish-form__field animate-fade-in-up delay-2">
-          <span className="label">Quick Message Ideas</span>
+          <div className="preset-header">
+            <span className="label">Quick Message Ideas</span>
+
+            {/* Language selector */}
+            <div className="translate-lang">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M2 5h7" />
+                <path d="M4 3v2" />
+                <path d="M6 11c1.5-1.5 3.5-2 5.5-2 3 0 5 1.5 5.5 3.5" />
+                <path d="M14.5 9.5c0-2 1.5-3.5 3.5-3.5s3 1.5 3 3.5-1.5 3.5-3.5 3.5c-2 0-3.5-1-4.5-2.5" />
+                <path d="M2 17h7" />
+                <path d="M9 17l3-8 3 8" />
+                <path d="M10.5 14.5h3" />
+              </svg>
+              <select
+                value={targetLang}
+                onChange={(e) => setTargetLang(e.target.value)}
+                className="translate-select"
+                aria-label="Translate to language"
+              >
+                {languages.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
           {/* Category tabs */}
           <div className="preset-tabs" role="tablist" aria-label="Message categories">
@@ -170,31 +222,68 @@ To
               aria-label={`${activeCategory} message presets`}
             >
               <div className="preset-grid">
-                {filteredPresets.map((preset) => (
-                  <button
-                    key={preset.id}
-                    className={`preset-card ${
-                      selectedPresetId === preset.id ? 'preset-card--selected' : ''
-                    }`}
-                    onClick={() => handlePresetSelect(preset.text)}
-                    aria-label={`Use ${preset.label} message`}
-                  >
-                    <span className="preset-card__label">{preset.label}</span>
-                    <span className="preset-card__preview">{preset.text}</span>
-                    <span className="preset-card__action">
-                      {selectedPresetId === preset.id ? (
-                        <span className="preset-card__check" aria-label="Selected">
-                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                            <path d="M3 7.5L5.5 10L11 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                          Selected
+                {filteredPresets.map((preset) => {
+                  const cacheKey = `${preset.id}_${targetLang}`
+                  const isTranslated = !!translatedTexts[cacheKey]
+                  const displayText = translatedTexts[cacheKey] || preset.text
+
+                  return (
+                    <div
+                      key={preset.id}
+                      className={`preset-card ${
+                        selectedPresetId === preset.id ||
+                        (isTranslated && message === translatedTexts[cacheKey])
+                          ? 'preset-card--selected'
+                          : ''
+                      }`}
+                    >
+                      <button
+                        className="preset-card__body"
+                        onClick={() => handlePresetSelect(displayText)}
+                        aria-label={`Use ${preset.label} message`}
+                      >
+                        <span className="preset-card__label">{preset.label}</span>
+                        <span className="preset-card__preview">{displayText}</span>
+                        {isTranslated && (
+                          <span className="preset-card__translated-badge">Translated</span>
+                        )}
+                        <span className="preset-card__action">
+                          {(selectedPresetId === preset.id ||
+                            (isTranslated && message === translatedTexts[cacheKey])) ? (
+                            <span className="preset-card__check" aria-label="Selected">
+                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                                <path d="M3 7.5L5.5 10L11 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                              Selected
+                            </span>
+                          ) : (
+                            'Use this'
+                          )}
                         </span>
-                      ) : (
-                        'Use this'
-                      )}
-                    </span>
-                  </button>
-                ))}
+                      </button>
+                      <button
+                        className="preset-card__translate"
+                        onClick={() => handleTranslate(preset.id, preset.text)}
+                        disabled={translatingId === preset.id}
+                        aria-label={`Translate ${preset.label} to ${languages.find(l => l.code === targetLang)?.label}`}
+                      >
+                        {translatingId === preset.id ? (
+                          <span className="preset-card__translate-spinner" />
+                        ) : (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M2 5h7" />
+                            <path d="M4 3v2" />
+                            <path d="M6 11c1.5-1.5 3.5-2 5.5-2 3 0 5 1.5 5.5 3.5" />
+                            <path d="M14.5 9.5c0-2 1.5-3.5 3.5-3.5s3 1.5 3 3.5-1.5 3.5-3.5 3.5c-2 0-3.5-1-4.5-2.5" />
+                            <path d="M2 17h7" />
+                            <path d="M9 17l3-8 3 8" />
+                            <path d="M10.5 14.5h3" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           )}
