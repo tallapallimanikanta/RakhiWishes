@@ -14,6 +14,33 @@
   overflow: hidden;
 }
 
+/* ── Background Video ── */
+
+.hero__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 240, 0.7) 0%,
+    rgba(255, 248, 240, 0.5) 50%,
+    rgba(255, 248, 240, 0.8) 100%
+  );
+  z-index: 0;
+}
+
 /* ── Decorative Orbs ── */
 
 .hero__decor {

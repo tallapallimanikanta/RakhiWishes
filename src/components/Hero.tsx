@@ -3,6 +3,19 @@ import './Hero.css'
 function Hero() {
   return (
     <section className="hero">
+      {/* Background video */}
+      <video
+        className="hero__video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+      >
+        <source src="/Rakhi.mp4" type="video/mp4" />
+      </video>
+      <div className="hero__overlay" aria-hidden="true" />
+
       <div className="hero__decor hero__decor--left" aria-hidden="true" />
       <div className="hero__decor hero__decor--right" aria-hidden="true" />
 
