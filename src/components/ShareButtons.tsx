@@ -15,13 +15,7 @@ function CopyIcon() {
 function CheckIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path
-        d="M4.5 9.75L7.5 12.75L13.5 5.25"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M4.5 9.75L7.5 12.75L13.5 5.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -45,8 +39,11 @@ interface ShareButtonsProps {
 
 function ShareButtons({ wishUrl, recipientName }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
+  const [showApps, setShowApps] = useState(false)
 
   const shareText = `Happy Raksha Bandhan, ${recipientName}! 🎀 Here's a special wish for you:`
+  const encodedText = encodeURIComponent(shareText)
+  const encodedUrl = encodeURIComponent(wishUrl)
 
   /* ── Copy to clipboard ── */
   const handleCopy = useCallback(async () => {
@@ -68,7 +65,7 @@ function ShareButtons({ wishUrl, recipientName }: ShareButtonsProps) {
     }
   }, [wishUrl])
 
-  /* ── Share ── */
+  /* ── Web Share API ── */
   const handleShare = useCallback(async () => {
     if (navigator.share) {
       try {
@@ -77,14 +74,14 @@ function ShareButtons({ wishUrl, recipientName }: ShareButtonsProps) {
           text: shareText,
           url: wishUrl,
         })
+        return
       } catch {
-        // User cancelled — do nothing
+        // User cancelled or failed — show app links
       }
-    } else {
-      // Fallback: copy link
-      handleCopy()
     }
-  }, [wishUrl, recipientName, shareText, handleCopy])
+    // Fallback: show app-specific share links
+    setShowApps((prev) => !prev)
+  }, [wishUrl, recipientName, shareText])
 
   return (
     <div className="share-buttons" role="group" aria-label="Share wish">
@@ -105,6 +102,46 @@ function ShareButtons({ wishUrl, recipientName }: ShareButtonsProps) {
         {copied ? <CheckIcon /> : <CopyIcon />}
         {copied ? 'Copied!' : 'Copy Link'}
       </button>
+
+      {/* App-specific share links */}
+      {showApps && (
+        <div className="share-apps">
+          <a
+            className="share-app"
+            href={`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="share-app__icon">💬</span>
+            <span className="share-app__name">WhatsApp</span>
+          </a>
+          <a
+            className="share-app"
+            href={`https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="share-app__icon">✈️</span>
+            <span className="share-app__name">Telegram</span>
+          </a>
+          <a
+            className="share-app"
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="share-app__icon">📘</span>
+            <span className="share-app__name">Facebook</span>
+          </a>
+          <a
+            className="share-app"
+            href={`mailto:?subject=Raksha Bandhan Wish for ${encodeURIComponent(recipientName)}&body=${encodedText}%0A%0A${encodedUrl}`}
+          >
+            <span className="share-app__icon">📧</span>
+            <span className="share-app__name">Email</span>
+          </a>
+        </div>
+      )}
     </div>
   )
 }
