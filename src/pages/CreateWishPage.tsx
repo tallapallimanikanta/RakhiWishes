@@ -81,6 +81,7 @@ function CreateWishPage({
         <WishPreview
           selectedRakhi={selectedRakhi}
           recipientName={recipientName}
+          senderName={senderName}
           message={message}
         />
 

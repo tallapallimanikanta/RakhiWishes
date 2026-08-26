@@ -4,10 +4,11 @@ import './WishPreview.css'
 interface WishPreviewProps {
   selectedRakhi: Rakhi | null
   recipientName: string
+  senderName: string
   message: string
 }
 
-function WishPreview({ selectedRakhi, recipientName, message }: WishPreviewProps) {
+function WishPreview({ selectedRakhi, recipientName, senderName, message }: WishPreviewProps) {
   const hasContent = selectedRakhi !== null || recipientName.trim().length > 0 || message.trim().length > 0
 
   return (
@@ -87,6 +88,9 @@ function WishPreview({ selectedRakhi, recipientName, message }: WishPreviewProps
           {/* Signature line */}
           <div className="preview-card__signature">
             <span className="preview-card__signature-text">With love,</span>
+            <span className="preview-card__signature-name">
+              {senderName.trim() || <span className="preview-card__placeholder-text">Your Name</span>}
+            </span>
             <span className="preview-card__signature-line" />
           </div>
 

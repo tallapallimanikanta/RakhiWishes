@@ -274,8 +274,15 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: var(--space-2);
+  gap: var(--space-1);
   margin-top: var(--space-3);
+}
+
+.preview-card__signature-name {
+  font-family: var(--font-script);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
 }
 
 .preview-card__signature-text {

@@ -6,7 +6,7 @@ import './StepPage.css'
 
 function PreviewPage() {
   const navigate = useNavigate()
-  const { selectedRakhi, recipientName, message, showLetter } = useCreateFlow()
+  const { selectedRakhi, recipientName, senderName, message, showLetter } = useCreateFlow()
 
   return (
     <main className="step-page">
@@ -16,6 +16,7 @@ function PreviewPage() {
         <WishPreview
           selectedRakhi={selectedRakhi}
           recipientName={recipientName}
+          senderName={senderName}
           message={message}
         />
 
