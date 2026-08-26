@@ -86,7 +86,7 @@ function WishForm({
         {/* ── Recipient Name ── */}
         <div className="wish-form__field animate-fade-in-up delay-1">
           <label htmlFor="recipient-name" className="label">
-            Recipient&apos;s Name
+To
             <span className="label__required" aria-hidden="true">*</span>
           </label>
           <input
