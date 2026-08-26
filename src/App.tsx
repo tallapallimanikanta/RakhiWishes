@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import CreateWishPage from './pages/CreateWishPage'
+import RakhiSelectPage from './pages/RakhiSelectPage'
+import MessagePage from './pages/MessagePage'
+import PreviewPage from './pages/PreviewPage'
 import LetterPage from './pages/LetterPage'
 import WishPage from './pages/WishPage'
 import LoadingScreen from './components/LoadingScreen'
@@ -17,7 +19,7 @@ function CreateFlow() {
   const [selectedRakhi, setSelectedRakhi] = useState<Rakhi | null>(null)
   const [recipientName, setRecipientName] = useState('')
   const [message, setMessage] = useState('')
-  const [view, setView] = useState<'create' | 'letter'>('create')
+  const [view, setView] = useState<'steps' | 'letter'>('steps')
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
 
@@ -27,8 +29,8 @@ function CreateFlow() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
-  const handleBackToEdit = useCallback(() => {
-    setView('create')
+  const handleBackToSteps = useCallback(() => {
+    setView('steps')
     setSaveError(null)
   }, [])
 
@@ -54,7 +56,7 @@ function CreateFlow() {
         selectedRakhi={selectedRakhi}
         recipientName={recipientName}
         message={message}
-        onBack={handleBackToEdit}
+        onBack={handleBackToSteps}
         onShare={handleCreateAndShare}
         isSaving={isSaving}
         saveError={saveError}
@@ -63,15 +65,36 @@ function CreateFlow() {
   }
 
   return (
-    <CreateWishPage
-      selectedRakhi={selectedRakhi}
-      recipientName={recipientName}
-      message={message}
-      onRakhiSelect={setSelectedRakhi}
-      onRecipientNameChange={setRecipientName}
-      onMessageChange={setMessage}
-      onCreateWish={handleShowLetter}
-    />
+    <Routes>
+      <Route
+        path="/create"
+        element={
+          <RakhiSelectPage onSelect={setSelectedRakhi} />
+        }
+      />
+      <Route
+        path="/create/message"
+        element={
+          <MessagePage
+            recipientName={recipientName}
+            message={message}
+            onRecipientNameChange={setRecipientName}
+            onMessageChange={setMessage}
+          />
+        }
+      />
+      <Route
+        path="/create/preview"
+        element={
+          <PreviewPage
+            selectedRakhi={selectedRakhi}
+            recipientName={recipientName}
+            message={message}
+            onCreateWish={handleShowLetter}
+          />
+        }
+      />
+    </Routes>
   )
 }
 
@@ -85,7 +108,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/create" element={<CreateFlow />} />
+            <Route path="/create/*" element={<CreateFlow />} />
             <Route path="/wish/:id" element={<WishPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
