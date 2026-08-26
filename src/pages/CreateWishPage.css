@@ -21,6 +21,7 @@
 }
 
 .page-header__inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,6 +33,11 @@
   .page-header__inner {
     justify-content: center;
   }
+}
+
+.page-header__inner .theme-toggle {
+  position: absolute;
+  right: 0;
 }
 
 .page-header__logo {
