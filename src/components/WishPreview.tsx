@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import type { Rakhi } from '../data/rakhis'
 import './WishPreview.css'
 
@@ -11,9 +11,84 @@ interface WishPreviewProps {
 
 function WishPreview({ selectedRakhi, recipientName, senderName, message }: WishPreviewProps) {
   const [isFlipped, setIsFlipped] = useState(false)
+  const [dragOffset, setDragOffset] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const startXRef = useRef(0)
   const hasContent = selectedRakhi !== null || recipientName.trim().length > 0 || message.trim().length > 0
 
-  const handleFlip = () => setIsFlipped((prev) => !prev)
+  const handleDragStart = useCallback((clientX: number) => {
+    startXRef.current = clientX
+    setIsDragging(true)
+  }, [])
+
+  const handleDragMove = useCallback((clientX: number) => {
+    if (!isDragging) return
+    const diff = clientX - startXRef.current
+    // Only allow dragging in the revealing direction
+    if (!isFlipped && diff > 0) {
+      setDragOffset(Math.min(diff, 300))
+    } else if (isFlipped && diff < 0) {
+      setDragOffset(Math.max(diff, -300))
+    }
+  }, [isDragging, isFlipped])
+
+  const handleDragEnd = useCallback(() => {
+    if (!isDragging) return
+    setIsDragging(false)
+
+    // If dragged more than 80px, complete the flip
+    if (Math.abs(dragOffset) > 80) {
+      setIsFlipped((prev) => !prev)
+    }
+    setDragOffset(0)
+  }, [isDragging, dragOffset])
+
+  // Mouse events
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    handleDragStart(e.clientX)
+  }, [handleDragStart])
+
+  const onMouseMove = useCallback((e: React.MouseEvent) => {
+    handleDragMove(e.clientX)
+  }, [handleDragMove])
+
+  const onMouseUp = useCallback(() => {
+    handleDragEnd()
+  }, [handleDragEnd])
+
+  const onMouseLeave = useCallback(() => {
+    handleDragEnd()
+  }, [handleDragEnd])
+
+  // Touch events
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    handleDragStart(e.touches[0].clientX)
+  }, [handleDragStart])
+
+  const onTouchMove = useCallback((e: React.TouchEvent) => {
+    handleDragMove(e.touches[0].clientX)
+  }, [handleDragMove])
+
+  const onTouchEnd = useCallback(() => {
+    handleDragEnd()
+  }, [handleDragEnd])
+
+  // Tap (no drag)
+  const handleTap = useCallback(() => {
+    if (Math.abs(dragOffset) < 5) {
+      setIsFlipped((prev) => !prev)
+    }
+  }, [dragOffset])
+
+  // Calculate transform based on drag
+  const frontTransform = isFlipped
+    ? `translateX(calc(-100% + ${dragOffset}px))`
+    : `translateX(${dragOffset}px)`
+
+  const backTransform = isFlipped
+    ? `translateX(${dragOffset}px)`
+    : `translateX(calc(100% + ${dragOffset}px))`
 
   return (
     <section className="preview-section" aria-labelledby="preview-title">
@@ -21,20 +96,31 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
         <h2 id="preview-title" className="section-title">
           Live Preview
         </h2>
-        <p className="preview-flip-hint">Tap the card to flip</p>
+        <p className="preview-flip-hint">Drag or tap the card to flip</p>
       </div>
 
       <div className="preview-wrapper animate-fade-in-up delay-1">
         <div
-          className={`preview-card-container ${isFlipped ? 'preview-card-container--flipped' : ''}`}
-          onClick={handleFlip}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleFlip() }}
+          ref={containerRef}
+          className={`preview-card-container ${isFlipped ? 'preview-card-container--flipped' : ''} ${isDragging ? 'preview-card-container--dragging' : ''}`}
+          onClick={handleTap}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsFlipped((p) => !p) }}
           role="button"
           tabIndex={0}
-          aria-label={isFlipped ? 'Flip to front' : 'Flip to back'}
+          aria-label={isFlipped ? 'Drag or tap to see front' : 'Drag or tap to see back'}
         >
           {/* ── Front Side ── */}
-          <div className={`preview-card preview-card--front ${hasContent ? 'preview-card--active' : ''}`}>
+          <div
+            className={`preview-card preview-card--front ${hasContent ? 'preview-card--active' : ''}`}
+            style={{ transform: frontTransform }}
+          >
             {/* Top ornament */}
             <div className="preview-card__ornament-top" aria-hidden="true">
               <span className="preview-card__ornament-line" />
@@ -117,7 +203,10 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
           </div>
 
           {/* ── Back Side ── */}
-          <div className="preview-card preview-card--back">
+          <div
+            className="preview-card preview-card--back"
+            style={{ transform: backTransform }}
+          >
             <div className="preview-card__back-content">
               <div className="preview-card__back-rakhi" aria-hidden="true">
                 {selectedRakhi?.image ? (

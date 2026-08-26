@@ -44,8 +44,10 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-2xl);
-  cursor: pointer;
+  cursor: grab;
   outline: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 @media (min-width: 768px) {
@@ -59,29 +61,21 @@
   outline-offset: 4px;
 }
 
+.preview-card-container--dragging {
+  cursor: grabbing;
+}
+
 /* ── Sliding panels ── */
 
 .preview-card--front,
 .preview-card--back {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-.preview-card--front {
-  transform: translateX(0);
-}
-
-.preview-card--back {
-  position: absolute;
-  inset: 0;
-  transform: translateX(100%);
-}
-
-.preview-card-container--flipped .preview-card--front {
-  transform: translateX(-100%);
-}
-
-.preview-card-container--flipped .preview-card--back {
-  transform: translateX(0);
+.preview-card-container--dragging .preview-card--front,
+.preview-card-container--dragging .preview-card--back {
+  transition: none;
 }
 
 /* ============================================
@@ -321,6 +315,8 @@
    ============================================ */
 
 .preview-card--back {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(135deg, #FFF8F0 0%, #FFF0E8 100%);
   border-color: var(--color-rakhi-pink-light);
   display: flex;
