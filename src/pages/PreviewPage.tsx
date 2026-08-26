@@ -1,23 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import StepHeader from '../components/StepHeader'
 import WishPreview from '../components/WishPreview'
-import type { Rakhi } from '../data/rakhis'
+import { useCreateFlow } from '../App'
 import './StepPage.css'
 
-interface PreviewPageProps {
-  selectedRakhi: Rakhi | null
-  recipientName: string
-  message: string
-  onCreateWish: () => void
-}
-
-function PreviewPage({
-  selectedRakhi,
-  recipientName,
-  message,
-  onCreateWish,
-}: PreviewPageProps) {
+function PreviewPage() {
   const navigate = useNavigate()
+  const { selectedRakhi, recipientName, message, showLetter } = useCreateFlow()
 
   return (
     <main className="step-page">
@@ -33,7 +22,7 @@ function PreviewPage({
         <div className="step-page__action">
           <button
             className="btn btn-primary btn-lg"
-            onClick={onCreateWish}
+            onClick={showLetter}
           >
             Create My Rakhi Wish
           </button>

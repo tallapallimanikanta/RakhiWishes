@@ -1,18 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import StepHeader from '../components/StepHeader'
 import RakhiSelection from '../components/RakhiSelection'
+import { useCreateFlow } from '../App'
 import type { Rakhi } from '../data/rakhis'
 import './StepPage.css'
 
-interface RakhiSelectPageProps {
-  onSelect: (rakhi: Rakhi) => void
-}
-
-function RakhiSelectPage({ onSelect }: RakhiSelectPageProps) {
+function RakhiSelectPage() {
   const navigate = useNavigate()
+  const { setSelectedRakhi } = useCreateFlow()
 
   const handleSelect = (rakhi: Rakhi) => {
-    onSelect(rakhi)
+    setSelectedRakhi(rakhi)
     navigate('/create/message')
   }
 

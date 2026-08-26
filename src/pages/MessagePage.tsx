@@ -1,22 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import StepHeader from '../components/StepHeader'
 import WishForm from '../components/WishForm'
+import { useCreateFlow } from '../App'
 import './StepPage.css'
 
-interface MessagePageProps {
-  recipientName: string
-  message: string
-  onRecipientNameChange: (value: string) => void
-  onMessageChange: (value: string) => void
-}
-
-function MessagePage({
-  recipientName,
-  message,
-  onRecipientNameChange,
-  onMessageChange,
-}: MessagePageProps) {
+function MessagePage() {
   const navigate = useNavigate()
+  const { recipientName, message, setRecipientName, setMessage } = useCreateFlow()
 
   const canProceed = recipientName.trim().length > 0 && message.trim().length > 0
 
@@ -28,8 +18,8 @@ function MessagePage({
         <WishForm
           recipientName={recipientName}
           message={message}
-          onRecipientNameChange={onRecipientNameChange}
-          onMessageChange={onMessageChange}
+          onRecipientNameChange={setRecipientName}
+          onMessageChange={setMessage}
         />
 
         <div className="step-page__action">

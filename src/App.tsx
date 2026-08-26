@@ -1,10 +1,9 @@
-import { useState, useCallback } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { useState, useCallback, createContext, useContext } from 'react'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import RakhiSelectPage from './pages/RakhiSelectPage'
 import MessagePage from './pages/MessagePage'
 import PreviewPage from './pages/PreviewPage'
-import LetterPage from './pages/LetterPage'
 import WishPage from './pages/WishPage'
 import LoadingScreen from './components/LoadingScreen'
 import { ThemeProvider } from './hooks/useTheme'
@@ -12,29 +11,53 @@ import { generateWishId } from './utils/wishId'
 import { saveWish } from './utils/wishStore'
 import type { Rakhi } from './data/rakhis'
 
-/* ── Create Flow (state managed here) ── */
+/* ── Create Flow Context ── */
 
-function CreateFlow() {
-  const navigate = useNavigate()
+interface CreateFlowState {
+  selectedRakhi: Rakhi | null
+  recipientName: string
+  message: string
+  isSaving: boolean
+  saveError: string | null
+  view: 'steps' | 'letter'
+  setSelectedRakhi: (rakhi: Rakhi) => void
+  setRecipientName: (name: string) => void
+  setMessage: (msg: string) => void
+  showLetter: () => void
+  backToSteps: () => void
+  createAndShare: () => Promise<void>
+}
+
+const CreateFlowContext = createContext<CreateFlowState | null>(null)
+
+export function useCreateFlow() {
+  const ctx = useContext(CreateFlowContext)
+  if (!ctx) throw new Error('useCreateFlow must be used within CreateFlowProvider')
+  return ctx
+}
+
+/* ── Create Flow Provider ── */
+
+function CreateFlowProvider({ children }: { children: React.ReactNode }) {
   const [selectedRakhi, setSelectedRakhi] = useState<Rakhi | null>(null)
   const [recipientName, setRecipientName] = useState('')
   const [message, setMessage] = useState('')
-  const [view, setView] = useState<'steps' | 'letter'>('steps')
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
+  const [view, setView] = useState<'steps' | 'letter'>('steps')
 
-  const handleShowLetter = useCallback(() => {
+  const showLetter = useCallback(() => {
     setView('letter')
     setSaveError(null)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
-  const handleBackToSteps = useCallback(() => {
+  const backToSteps = useCallback(() => {
     setView('steps')
     setSaveError(null)
   }, [])
 
-  const handleCreateAndShare = useCallback(async () => {
+  const createAndShare = useCallback(async () => {
     if (!selectedRakhi || !recipientName.trim() || !message.trim()) return
 
     setIsSaving(true)
@@ -42,79 +65,33 @@ function CreateFlow() {
     try {
       const wishId = generateWishId()
       await saveWish(selectedRakhi, recipientName, message, wishId)
-      navigate(`/wish/${wishId}`)
+      window.location.href = `/wish/${wishId}`
     } catch {
       setSaveError('Failed to save your wish. Please try again.')
     } finally {
       setIsSaving(false)
     }
-  }, [selectedRakhi, recipientName, message, navigate])
-
-  if (view === 'letter') {
-    return (
-      <LetterPage
-        selectedRakhi={selectedRakhi}
-        recipientName={recipientName}
-        message={message}
-        onBack={handleBackToSteps}
-        onShare={handleCreateAndShare}
-        isSaving={isSaving}
-        saveError={saveError}
-      />
-    )
-  }
+  }, [selectedRakhi, recipientName, message])
 
   return (
-    <Routes>
-      <Route
-        path="/create"
-        element={
-          <RakhiSelectPage onSelect={setSelectedRakhi} />
-        }
-      />
-      <Route
-        path="/create/message"
-        element={
-          <MessagePage
-            recipientName={recipientName}
-            message={message}
-            onRecipientNameChange={setRecipientName}
-            onMessageChange={setMessage}
-          />
-        }
-      />
-      <Route
-        path="/create/preview"
-        element={
-          <PreviewPage
-            selectedRakhi={selectedRakhi}
-            recipientName={recipientName}
-            message={message}
-            onCreateWish={handleShowLetter}
-          />
-        }
-      />
-    </Routes>
-  )
-}
-
-/* ── App with Router ── */
-
-function App() {
-  return (
-    <>
-      <LoadingScreen />
-      <ThemeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/create/*" element={<CreateFlow />} />
-            <Route path="/wish/:id" element={<WishPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </>
+    <CreateFlowContext.Provider
+      value={{
+        selectedRakhi,
+        recipientName,
+        message,
+        isSaving,
+        saveError,
+        view,
+        setSelectedRakhi,
+        setRecipientName,
+        setMessage,
+        showLetter,
+        backToSteps,
+        createAndShare,
+      }}
+    >
+      {children}
+    </CreateFlowContext.Provider>
   )
 }
 
@@ -134,6 +111,40 @@ function NotFound() {
         </a>
       </div>
     </main>
+  )
+}
+
+/* ── App with Router ── */
+
+function App() {
+  return (
+    <>
+      <LoadingScreen />
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            {/* Create flow — layout route shares one provider */}
+            <Route
+              path="/create"
+              element={
+                <CreateFlowProvider>
+                  <Outlet />
+                </CreateFlowProvider>
+              }
+            >
+              <Route index element={<RakhiSelectPage />} />
+              <Route path="message" element={<MessagePage />} />
+              <Route path="preview" element={<PreviewPage />} />
+            </Route>
+
+            <Route path="/wish/:id" element={<WishPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   )
 }
 
