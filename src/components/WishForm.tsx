@@ -80,9 +80,6 @@ function WishForm({
         <h2 id="wish-form-title" className="section-title">
           Write Your Heart Out
         </h2>
-        <p className="section-subtitle">
-          Add a personal touch to make it truly special
-        </p>
       </div>
 
       <div className="wish-form__fields">
