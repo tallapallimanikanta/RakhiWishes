@@ -16,7 +16,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding-top: 20px;
+    padding-top: 0;
   }
 }
 
