@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Hero from '../components/Hero'
 import RakhiSelection from '../components/RakhiSelection'
 import WishForm from '../components/WishForm'
@@ -25,10 +26,19 @@ function CreateWishPage({
   onMessageChange,
   onCreateWish,
 }: CreateWishPageProps) {
+  const [showForm, setShowForm] = useState(false)
+
   const isFormValid =
     selectedRakhi !== null &&
     recipientName.trim().length > 0 &&
     message.trim().length > 0
+
+  const handleStart = () => {
+    setShowForm(true)
+    setTimeout(() => {
+      document.querySelector('.rakhi-section')?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }
 
   return (
     <main className="create-wish-page">
@@ -44,56 +54,60 @@ function CreateWishPage({
 
       <div className="container">
         {/* Hero */}
-        <Hero />
+        <Hero onStart={handleStart} />
 
-        {/* Divider */}
-        <hr className="divider divider-ornate" aria-hidden="true" />
+        {showForm && (
+          <>
+            {/* Divider */}
+            <hr className="divider divider-ornate" aria-hidden="true" />
 
-        {/* Rakhi Selection */}
-        <RakhiSelection onSelect={onRakhiSelect} />
+            {/* Rakhi Selection */}
+            <RakhiSelection onSelect={onRakhiSelect} />
 
-        {/* Divider */}
-        <hr className="divider" aria-hidden="true" />
+            {/* Divider */}
+            <hr className="divider" aria-hidden="true" />
 
-        {/* Personal Message Form */}
-        <WishForm
-          recipientName={recipientName}
-          message={message}
-          onRecipientNameChange={onRecipientNameChange}
-          onMessageChange={onMessageChange}
-        />
+            {/* Personal Message Form */}
+            <WishForm
+              recipientName={recipientName}
+              message={message}
+              onRecipientNameChange={onRecipientNameChange}
+              onMessageChange={onMessageChange}
+            />
 
-        {/* Divider */}
-        <hr className="divider divider-ornate" aria-hidden="true" />
+            {/* Divider */}
+            <hr className="divider divider-ornate" aria-hidden="true" />
 
-        {/* Live Preview */}
-        <WishPreview
-          selectedRakhi={selectedRakhi}
-          recipientName={recipientName}
-          message={message}
-        />
+            {/* Live Preview */}
+            <WishPreview
+              selectedRakhi={selectedRakhi}
+              recipientName={recipientName}
+              message={message}
+            />
 
-        {/* Create Button */}
-        <section className="create-section animate-fade-in-up">
-          <button
-            className="btn btn-primary btn-lg create-btn"
-            onClick={onCreateWish}
-            disabled={!isFormValid}
-          >
-            Create My Rakhi Wish
-          </button>
-          {!isFormValid && (
-            <p className="create-section__hint">
-              {!selectedRakhi && 'Choose a Rakhi design '}
-              {selectedRakhi && recipientName.trim().length === 0 && 'Enter a name '}
-              {selectedRakhi &&
-                recipientName.trim().length > 0 &&
-                message.trim().length === 0 &&
-                'Write a message '}
-              to continue
-            </p>
-          )}
-        </section>
+            {/* Create Button */}
+            <section className="create-section animate-fade-in-up">
+              <button
+                className="btn btn-primary btn-lg create-btn"
+                onClick={onCreateWish}
+                disabled={!isFormValid}
+              >
+                Create My Rakhi Wish
+              </button>
+              {!isFormValid && (
+                <p className="create-section__hint">
+                  {!selectedRakhi && 'Choose a Rakhi design '}
+                  {selectedRakhi && recipientName.trim().length === 0 && 'Enter a name '}
+                  {selectedRakhi &&
+                    recipientName.trim().length > 0 &&
+                    message.trim().length === 0 &&
+                    'Write a message '}
+                  to continue
+                </p>
+              )}
+            </section>
+          </>
+        )}
       </div>
 
       {/* Footer */}

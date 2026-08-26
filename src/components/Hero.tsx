@@ -1,7 +1,11 @@
 import FlowerPetals from './FlowerPetals'
 import './Hero.css'
 
-function Hero() {
+interface HeroProps {
+  onStart: () => void
+}
+
+function Hero({ onStart }: HeroProps) {
   return (
     <section className="hero">
       <FlowerPetals />
@@ -35,9 +39,7 @@ function Hero() {
         </p>
         <button
           className="hero__cta btn btn-primary animate-fade-in-up delay-3"
-          onClick={() => {
-            document.querySelector('.rakhi-section')?.scrollIntoView({ behavior: 'smooth' })
-          }}
+          onClick={onStart}
         >
           Create your Greetings
         </button>
