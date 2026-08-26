@@ -1,5 +1,5 @@
 /* ============================================
-   Step Header
+   Step Header — compact single row
    ============================================ */
 
 .step-header {
@@ -15,9 +15,7 @@
 .step-header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-top: var(--space-2);
-  padding-bottom: var(--space-2);
+  padding: var(--space-2) 0;
   gap: var(--space-2);
 }
 
@@ -25,8 +23,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-full);
   border: 1.5px solid var(--color-border);
   background: var(--color-bg-surface);
@@ -46,29 +44,41 @@
   outline-offset: 2px;
 }
 
-.step-header__title {
-  font-family: var(--font-script);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-  color: var(--color-text-primary);
-  text-align: center;
+/* ── Center: title + progress ── */
+
+.step-header__center {
   flex: 1;
-}
-
-/* ── Progress Bar ── */
-
-.step-header__progress {
-  padding: 0 var(--space-4) var(--space-2);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  min-width: 0;
+}
+
+.step-header__title {
+  font-family: var(--font-script);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Progress bar inline ── */
+
+.step-header__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  max-width: 180px;
 }
 
 .step-header__bar {
-  width: 100%;
-  max-width: 300px;
-  height: 3px;
+  flex: 1;
+  height: 2px;
   background: var(--color-border);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -82,7 +92,8 @@
 }
 
 .step-header__count {
-  font-size: var(--text-xs);
+  font-size: 10px;
   font-weight: var(--weight-medium);
   color: var(--color-text-muted);
+  flex-shrink: 0;
 }

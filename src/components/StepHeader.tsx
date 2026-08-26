@@ -24,20 +24,20 @@ function StepHeader({ title, step, totalSteps }: StepHeaderProps) {
           </svg>
         </button>
 
-        <h1 className="step-header__title">{title}</h1>
+        <div className="step-header__center">
+          <h1 className="step-header__title">{title}</h1>
+          <div className="step-header__progress">
+            <div className="step-header__bar">
+              <div
+                className="step-header__fill"
+                style={{ width: `${(step / totalSteps) * 100}%` }}
+              />
+            </div>
+            <span className="step-header__count">{step}/{totalSteps}</span>
+          </div>
+        </div>
 
         <ThemeToggle />
-      </div>
-
-      {/* Step indicator */}
-      <div className="step-header__progress">
-        <div className="step-header__bar">
-          <div
-            className="step-header__fill"
-            style={{ width: `${(step / totalSteps) * 100}%` }}
-          />
-        </div>
-        <span className="step-header__count">Step {step} of {totalSteps}</span>
       </div>
     </header>
   )
