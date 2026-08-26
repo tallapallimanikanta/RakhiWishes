@@ -34,16 +34,6 @@ function Hero() {
           Choose a Rakhi, write your heart out, and share the love.
         </p>
       </div>
-
-      {/* Scroll indicator */}
-      <div className="hero__scroll animate-fade-in delay-4" aria-hidden="true">
-        <span className="hero__scroll-text">Scroll down</span>
-        <span className="hero__scroll-arrow">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 4V16M10 16L5 11M10 16L15 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </span>
-      </div>
     </section>
   )
 }
