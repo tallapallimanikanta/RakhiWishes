@@ -16,9 +16,6 @@ function WishPreview({ selectedRakhi, recipientName, message }: WishPreviewProps
         <h2 id="preview-title" className="section-title">
           Live Preview
         </h2>
-        <p className="section-subtitle">
-          This is what your recipient will see
-        </p>
       </div>
 
       <div className="preview-wrapper animate-fade-in-up delay-1">
