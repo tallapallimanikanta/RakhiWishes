@@ -37,78 +37,88 @@
 }
 
 /* ============================================
-   Slide Container
+   3D Flip Container (Reference Style)
    ============================================ */
 
 .preview-card-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-2xl);
+  perspective: 1200px;
   cursor: grab;
   outline: none;
   user-select: none;
   -webkit-user-select: none;
+  height: 500px;
 }
 
 @media (min-width: 768px) {
   .preview-card-container {
-    border-radius: 32px;
+    height: 560px;
   }
 }
 
 .preview-card-container:focus-visible {
   outline: 2px solid var(--color-rakhi-pink);
   outline-offset: 4px;
+  border-radius: var(--radius-2xl);
 }
 
 .preview-card-container--dragging {
   cursor: grabbing;
 }
 
-/* ── Sliding panels ── */
+/* ── Inner wrapper with preserve-3d ── */
+
+.preview-card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.preview-card-container--dragging .preview-card-inner {
+  transition: none;
+}
+
+/* ── Front and Back faces ── */
 
 .preview-card--front,
 .preview-card--back {
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-  will-change: transform;
-}
-
-.preview-card-container--dragging .preview-card--front,
-.preview-card-container--dragging .preview-card--back {
-  transition: none;
+  box-shadow:
+    rgba(0, 0, 0, 0.15) 0px 2px 4px,
+    rgba(0, 0, 0, 0.1) 0px 8px 16px -4px,
+    rgba(0, 0, 0, 0.05) 0px -1px 0px inset;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* ============================================
    Preview Card (Front)
    ============================================ */
 
-.preview-card {
-  position: relative;
+.preview-card--front {
   background: var(--color-bg-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-2xl);
   padding: var(--space-5) var(--space-4);
   text-align: center;
   overflow: hidden;
-  transition:
-    border-color var(--duration-normal) var(--ease-default),
-    box-shadow var(--duration-slow) var(--ease-default);
-}
-
-.preview-card--front {
-  min-height: 400px;
 }
 
 @media (min-width: 768px) {
-  .preview-card {
+  .preview-card--front {
     padding: var(--space-6) var(--space-8);
     border-radius: 32px;
   }
 }
 
-.preview-card--active {
-  border-color: var(--color-rakhi-pink-light);
-  box-shadow: var(--shadow-lg);
+.preview-card--front > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Ornaments ── */
@@ -315,14 +325,18 @@
    ============================================ */
 
 .preview-card--back {
-  position: absolute;
-  inset: 0;
   background: linear-gradient(135deg, #FFF8F0 0%, #FFF0E8 100%);
-  border-color: var(--color-rakhi-pink-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
+  border: 2px solid var(--color-rakhi-pink-light);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6) var(--space-4);
+  transform: rotateY(180deg);
+}
+
+@media (min-width: 768px) {
+  .preview-card--back {
+    padding: var(--space-8);
+    border-radius: 32px;
+  }
 }
 
 .preview-card__back-content {
@@ -388,16 +402,4 @@
   align-items: center;
   gap: var(--space-3);
   margin-top: var(--space-2);
-}
-
-/* ── Branding ── */
-
-.preview-card__brand {
-  margin-top: var(--space-3);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  color: var(--color-text-muted);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  margin-bottom: 0;
 }
