@@ -113,7 +113,7 @@
 }
 
 .hero__heading {
-  font-family: var(--font-logo);
+  font-family: var(--font-script);
   font-size: var(--text-4xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
