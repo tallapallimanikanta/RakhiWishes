@@ -41,6 +41,14 @@
   background: #F5C9A0;
 }
 
+.petal--6 {
+  background: #E85D75;
+}
+
+.petal--7 {
+  background: #C94C6D;
+}
+
 /* Falling animation */
 @keyframes petalFall {
   0% {
