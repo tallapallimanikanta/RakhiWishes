@@ -40,12 +40,20 @@ function WishPreview({ selectedRakhi, recipientName, message }: WishPreviewProps
                 className="preview-card__rakhi-circle"
                 style={{ background: selectedRakhi.gradient }}
               >
-                <div className="preview-card__rakhi-center">
-                  <div
-                    className="preview-card__rakhi-dot"
-                    style={{ backgroundColor: selectedRakhi.accentColor }}
+                {selectedRakhi.image ? (
+                  <img
+                    src={selectedRakhi.image}
+                    alt=""
+                    className="preview-card__rakhi-image"
                   />
-                </div>
+                ) : (
+                  <div className="preview-card__rakhi-center">
+                    <div
+                      className="preview-card__rakhi-dot"
+                      style={{ backgroundColor: selectedRakhi.accentColor }}
+                    />
+                  </div>
+                )}
               </div>
             ) : (
               <div className="preview-card__rakhi-placeholder">

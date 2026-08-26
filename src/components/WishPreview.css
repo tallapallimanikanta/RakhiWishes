@@ -144,21 +144,28 @@
 }
 
 .preview-card__rakhi-circle {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   box-shadow: var(--shadow-md);
   transition: transform var(--duration-slow) var(--ease-spring);
 }
 
 @media (min-width: 768px) {
   .preview-card__rakhi-circle {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
+}
+
+.preview-card__rakhi-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .preview-card--active .preview-card__rakhi-circle {
