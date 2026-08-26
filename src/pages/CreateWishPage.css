@@ -37,7 +37,7 @@
 
 .page-header__inner .theme-toggle {
   position: absolute;
-  right: 0;
+  right: var(--space-4);
 }
 
 .page-header__logo {
