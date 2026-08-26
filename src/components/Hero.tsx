@@ -1,11 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import FlowerPetals from './FlowerPetals'
 import './Hero.css'
 
-interface HeroProps {
-  onStart: () => void
-}
+function Hero() {
+  const navigate = useNavigate()
 
-function Hero({ onStart }: HeroProps) {
   return (
     <section className="hero">
       <FlowerPetals />
@@ -39,7 +38,7 @@ function Hero({ onStart }: HeroProps) {
         </p>
         <button
           className="hero__cta btn btn-primary animate-fade-in-up delay-3"
-          onClick={onStart}
+          onClick={() => navigate('/create')}
         >
           Create your Greetings
         </button>

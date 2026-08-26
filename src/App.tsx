@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import HomePage from './pages/HomePage'
 import CreateWishPage from './pages/CreateWishPage'
 import LetterPage from './pages/LetterPage'
 import WishPage from './pages/WishPage'
@@ -79,16 +80,17 @@ function CreateFlow() {
 function App() {
   return (
     <>
-    <LoadingScreen />
-    <ThemeProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<CreateFlow />} />
-        <Route path="/wish/:id" element={<WishPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-    </ThemeProvider>
+      <LoadingScreen />
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/create" element={<CreateFlow />} />
+            <Route path="/wish/:id" element={<WishPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </>
   )
 }
