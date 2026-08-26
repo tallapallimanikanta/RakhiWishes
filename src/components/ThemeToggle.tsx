@@ -22,12 +22,12 @@ function ThemeToggle() {
         </svg>
       ) : (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <circle cx="10" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" />
           <path
-            d="M10 2.5V4M10 16V17.5M17.5 10H16M4 10H2.5M15.303 4.697L14.232 5.768M5.768 14.232L4.697 15.303M15.303 15.303L14.232 14.232M5.768 5.768L4.697 4.697"
+            d="M17.39 11.15A7.5 7.5 0 018.85 2.61a7.5 7.5 0 108.54 8.54z"
             stroke="currentColor"
             strokeWidth="1.5"
             strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       )}
