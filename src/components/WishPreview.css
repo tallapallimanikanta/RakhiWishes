@@ -37,44 +37,51 @@
 }
 
 /* ============================================
-   3D Flip Container
+   Slide Container
    ============================================ */
 
 .preview-card-container {
-  perspective: 1200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
   cursor: pointer;
   outline: none;
+}
+
+@media (min-width: 768px) {
+  .preview-card-container {
+    border-radius: 32px;
+  }
 }
 
 .preview-card-container:focus-visible {
   outline: 2px solid var(--color-rakhi-pink);
   outline-offset: 4px;
-  border-radius: var(--radius-2xl);
 }
+
+/* ── Sliding panels ── */
 
 .preview-card--front,
 .preview-card--back {
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .preview-card--front {
-  transform: rotateY(0deg);
+  transform: translateX(0);
 }
 
 .preview-card--back {
   position: absolute;
   inset: 0;
-  transform: rotateY(180deg);
+  transform: translateX(100%);
 }
 
 .preview-card-container--flipped .preview-card--front {
-  transform: rotateY(-180deg);
+  transform: translateX(-100%);
 }
 
 .preview-card-container--flipped .preview-card--back {
-  transform: rotateY(0deg);
+  transform: translateX(0);
 }
 
 /* ============================================
@@ -319,6 +326,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 400px;
 }
 
 .preview-card__back-content {
