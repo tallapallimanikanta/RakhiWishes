@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import RakhiSelection from '../components/RakhiSelection'
 import WishForm from '../components/WishForm'
 import WishPreview from '../components/WishPreview'
-import ThemeToggle from '../components/ThemeToggle'
 import type { Rakhi } from '../data/rakhis'
 import './CreateWishPage.css'
 
@@ -39,7 +38,6 @@ function CreateWishPage({
           <a href="/" className="page-header__logo" aria-label="Rakhi Wish">
             Rakhi Wish
           </a>
-          <ThemeToggle />
         </div>
       </header>
 

@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import ThemeToggle from './ThemeToggle'
 import './StepHeader.css'
 
 interface StepHeaderProps {
@@ -37,7 +36,6 @@ function StepHeader({ title, step, totalSteps }: StepHeaderProps) {
           </div>
         </div>
 
-        <ThemeToggle />
       </div>
     </header>
   )
