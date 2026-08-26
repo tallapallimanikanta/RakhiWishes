@@ -78,7 +78,7 @@ function WishForm({
     <section className="wish-form" aria-labelledby="wish-form-title">
       <div className="section-header animate-fade-in-up">
         <h2 id="wish-form-title" className="section-title">
-          Write Your Heart Out
+          ❤ Write Your Heart Out ❤
         </h2>
       </div>
 
