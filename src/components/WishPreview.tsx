@@ -20,12 +20,6 @@ function WishPreview({ selectedRakhi, recipientName, message }: WishPreviewProps
 
       <div className="preview-wrapper animate-fade-in-up delay-1">
         <div className={`preview-card ${hasContent ? 'preview-card--active' : ''}`}>
-          {/* Decorative corners */}
-          <span className="preview-card__corner preview-card__corner--tl" aria-hidden="true" />
-          <span className="preview-card__corner preview-card__corner--tr" aria-hidden="true" />
-          <span className="preview-card__corner preview-card__corner--bl" aria-hidden="true" />
-          <span className="preview-card__corner preview-card__corner--br" aria-hidden="true" />
-
           {/* Top ornament */}
           <div className="preview-card__ornament-top" aria-hidden="true">
             <span className="preview-card__ornament-line" />
