@@ -36,15 +36,6 @@ function CreateWishPage({
       {/* Header */}
       <header className="page-header animate-fade-in">
         <div className="container page-header__inner">
-          <button
-            className="page-header__back"
-            onClick={() => navigate(-1)}
-            aria-label="Go back"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
           <a href="/" className="page-header__logo" aria-label="Rakhi Wish">
             Rakhi Wish
           </a>
@@ -53,8 +44,20 @@ function CreateWishPage({
       </header>
 
       <div className="container">
-        {/* Rakhi Selection — at top */}
-        <RakhiSelection onSelect={onRakhiSelect} />
+        {/* Back button + Rakhi Selection */}
+        <div className="create-page__back-row">
+          <button
+            className="create-page__back"
+            onClick={() => navigate(-1)}
+            aria-label="Go back"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <h2 className="section-title">Choose Your Rakhi</h2>
+        </div>
+        <RakhiSelection onSelect={onRakhiSelect} hideTitle />
 
         {/* Divider */}
         <hr className="divider" aria-hidden="true" />

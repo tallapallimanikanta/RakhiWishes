@@ -75,6 +75,40 @@
   outline-offset: 2px;
 }
 
+/* ── Back Row ── */
+
+.create-page__back-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-6);
+}
+
+.create-page__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-all);
+  flex-shrink: 0;
+}
+
+.create-page__back:hover {
+  border-color: var(--color-rakhi-pink-light);
+  color: var(--color-rakhi-pink);
+}
+
+.create-page__back:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 2px;
+}
+
 /* ── Create Section ── */
 
 .create-section {

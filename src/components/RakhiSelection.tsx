@@ -4,9 +4,10 @@ import './RakhiSelection.css'
 
 interface RakhiSelectionProps {
   onSelect: (rakhi: Rakhi) => void
+  hideTitle?: boolean
 }
 
-function RakhiSelection({ onSelect }: RakhiSelectionProps) {
+function RakhiSelection({ onSelect, hideTitle = false }: RakhiSelectionProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
   const handleSelect = (rakhi: Rakhi) => {
@@ -16,14 +17,16 @@ function RakhiSelection({ onSelect }: RakhiSelectionProps) {
 
   return (
     <section className="rakhi-section" aria-labelledby="rakhi-section-title">
-      <div className="section-header animate-fade-in-up">
-        <h2 id="rakhi-section-title" className="section-title">
-          Choose Your Rakhi
-        </h2>
-        <p className="section-subtitle">
-          Pick a design that speaks to your heart
-        </p>
-      </div>
+      {!hideTitle && (
+        <div className="section-header animate-fade-in-up">
+          <h2 id="rakhi-section-title" className="section-title">
+            Choose Your Rakhi
+          </h2>
+          <p className="section-subtitle">
+            Pick a design that speaks to your heart
+          </p>
+        </div>
+      )}
 
       <div
         className="rakhi-grid"
