@@ -139,6 +139,12 @@
   }
 }
 
+/* ── CTA Button ── */
+
+.hero__cta {
+  margin-top: var(--space-6);
+}
+
 /* ── Scroll Indicator ── */
 
 .hero__scroll {

@@ -33,6 +33,14 @@ function Hero() {
           <br className="hero__subtext-break" />
           Choose a Rakhi, write your heart out, and share the love.
         </p>
+        <button
+          className="hero__cta btn btn-primary animate-fade-in-up delay-3"
+          onClick={() => {
+            document.querySelector('.rakhi-section')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
+          Create your Greetings
+        </button>
       </div>
     </section>
   )
