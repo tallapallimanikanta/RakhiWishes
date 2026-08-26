@@ -47,6 +47,8 @@ function WishForm({
     ? presetMessages.filter((p) => p.category === activeCategory)
     : []
 
+  const selectedPresetId = presetMessages.find((p) => p.text === message)?.id ?? null
+
   /* ── Handlers ── */
   const handleNameChange = (value: string) => {
     // Allow typing but enforce max length at the field level
@@ -149,13 +151,26 @@ To
                 {filteredPresets.map((preset) => (
                   <button
                     key={preset.id}
-                    className="preset-card"
+                    className={`preset-card ${
+                      selectedPresetId === preset.id ? 'preset-card--selected' : ''
+                    }`}
                     onClick={() => handlePresetSelect(preset.text)}
                     aria-label={`Use ${preset.label} message`}
                   >
                     <span className="preset-card__label">{preset.label}</span>
                     <span className="preset-card__preview">{preset.text}</span>
-                    <span className="preset-card__action">Use this</span>
+                    <span className="preset-card__action">
+                      {selectedPresetId === preset.id ? (
+                        <span className="preset-card__check" aria-label="Selected">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                            <path d="M3 7.5L5.5 10L11 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Selected
+                        </span>
+                      ) : (
+                        'Use this'
+                      )}
+                    </span>
                   </button>
                 ))}
               </div>

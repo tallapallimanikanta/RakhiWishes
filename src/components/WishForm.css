@@ -211,3 +211,22 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+/* ── Selected State ── */
+
+.preset-card--selected {
+  border-color: var(--color-rakhi-pink);
+  background: rgba(217, 79, 122, 0.04);
+}
+
+.preset-card--selected .preset-card__action {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--color-rakhi-pink);
+}
+
+.preset-card__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
