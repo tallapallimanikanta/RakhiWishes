@@ -24,7 +24,7 @@ function PreviewPage() {
             className="btn btn-primary btn-lg"
             onClick={showLetter}
           >
-            Create My Rakhi Wish
+            Post the Letter
           </button>
           <button
             className="btn btn-ghost"
