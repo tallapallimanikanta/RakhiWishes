@@ -36,8 +36,8 @@
 
 .page-header__logo {
   font-family: var(--font-logo);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-regular);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
