@@ -102,11 +102,9 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
         >
           <div
             className="preview-card-inner"
-            style={{
-              transform: `rotateY(${rotation}deg)`,
-            }}
+            style={{ transform: `rotateY(${rotation}deg)` }}
           >
-            {/* ── Front Side ── */}
+            {/* ── Front Side (old card) ── */}
             <div className={`preview-card preview-card--front ${hasContent ? 'preview-card--active' : ''}`}>
               <div className="preview-card__ornament-top" aria-hidden="true">
                 <span className="preview-card__ornament-line" />
@@ -116,10 +114,7 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
 
               <div className="preview-card__rakhi">
                 {selectedRakhi ? (
-                  <div
-                    className="preview-card__rakhi-circle"
-                    style={{ background: selectedRakhi.gradient }}
-                  >
+                  <div className="preview-card__rakhi-circle" style={{ background: selectedRakhi.gradient }}>
                     {selectedRakhi.image ? (
                       <img src={selectedRakhi.image} alt="" className="preview-card__rakhi-image" />
                     ) : (
@@ -173,7 +168,7 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
               </div>
             </div>
 
-            {/* ── Back Side ── */}
+            {/* ── Back Side (old card) ── */}
             <div className="preview-card preview-card--back">
               <div className="preview-card__back-content">
                 <div className="preview-card__back-rakhi" aria-hidden="true">
