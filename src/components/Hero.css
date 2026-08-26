@@ -9,9 +9,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 25px var(--space-4) var(--space-8);
+  padding: var(--space-16) var(--space-4) var(--space-8);
   text-align: center;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 25px;
+  }
 }
 
 /* ── Video ── */
