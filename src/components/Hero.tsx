@@ -1,8 +1,10 @@
+import FlowerPetals from './FlowerPetals'
 import './Hero.css'
 
 function Hero() {
   return (
     <section className="hero">
+      <FlowerPetals />
       <div className="hero__decor hero__decor--left" aria-hidden="true" />
       <div className="hero__decor hero__decor--right" aria-hidden="true" />
 

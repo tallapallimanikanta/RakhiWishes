@@ -1,0 +1,85 @@
+/* ============================================
+   Falling Flower Petals
+   ============================================ */
+
+.petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.6;
+  animation: petalFall linear infinite;
+}
+
+/* Petal color variations */
+.petal--1 {
+  background: #F2A6BF;
+}
+
+.petal--2 {
+  background: #E8945A;
+}
+
+.petal--3 {
+  background: #C89B3C;
+}
+
+.petal--4 {
+  background: #D94F7A;
+}
+
+.petal--5 {
+  background: #F5C9A0;
+}
+
+/* Falling animation */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg) translateX(80px);
+    opacity: 0;
+  }
+}
+
+/* Different sizes for variety */
+.petal:nth-child(3n) {
+  width: 10px;
+  height: 10px;
+}
+
+.petal:nth-child(5n) {
+  width: 18px;
+  height: 18px;
+}
+
+.petal:nth-child(7n) {
+  width: 12px;
+  height: 12px;
+  opacity: 0.4;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .petal {
+    animation: none;
+    display: none;
+  }
+}
