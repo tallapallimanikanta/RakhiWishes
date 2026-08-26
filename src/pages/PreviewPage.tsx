@@ -1,10 +1,11 @@
+
 import StepHeader from '../components/StepHeader'
 import WishPreview from '../components/WishPreview'
 import { useCreateFlow } from '../App'
 import './StepPage.css'
 
 function PreviewPage() {
-  const { selectedRakhi, recipientName, senderName, message, showLetter } = useCreateFlow()
+  const { selectedRakhi, recipientName, senderName, message, createAndShare, isSaving } = useCreateFlow()
 
   return (
     <main className="step-page">
@@ -21,9 +22,10 @@ function PreviewPage() {
         <div className="step-page__action">
           <button
             className="btn btn-primary btn-lg"
-            onClick={showLetter}
+            onClick={createAndShare}
+            disabled={isSaving}
           >
-            Post the Letter
+            {isSaving ? 'Sending...' : 'Post the Letter'}
           </button>
         </div>
       </div>
