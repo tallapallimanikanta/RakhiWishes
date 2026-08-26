@@ -29,7 +29,7 @@ function Hero() {
         </h1>
 
         <p className="hero__subtext animate-fade-in-up delay-2">
-          Create a beautiful digital Rakhi wish for your brother or sister.
+          Create a beautiful digital Rakhi wish for your brother.
           <br className="hero__subtext-break" />
           Choose a Rakhi, write your heart out, and share the love.
         </p>
