@@ -1,11 +1,9 @@
-import { useNavigate } from 'react-router-dom'
 import StepHeader from '../components/StepHeader'
 import WishPreview from '../components/WishPreview'
 import { useCreateFlow } from '../App'
 import './StepPage.css'
 
 function PreviewPage() {
-  const navigate = useNavigate()
   const { selectedRakhi, recipientName, senderName, message, showLetter } = useCreateFlow()
 
   return (
@@ -27,12 +25,7 @@ function PreviewPage() {
           >
             Post the Letter
           </button>
-          <button
-            className="btn btn-ghost"
-            onClick={() => navigate('/create/message')}
-          >
-            Edit Message
-          </button>
+
         </div>
       </div>
     </main>
