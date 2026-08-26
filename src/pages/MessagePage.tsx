@@ -28,7 +28,7 @@ function MessagePage() {
             onClick={() => navigate('/create/preview')}
             disabled={!canProceed}
           >
-            Preview Your Wish
+            Preview Greeting
           </button>
           {!canProceed && (
             <p className="step-page__hint">
