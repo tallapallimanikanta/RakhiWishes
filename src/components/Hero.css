@@ -25,7 +25,7 @@
 .hero__video-wrapper {
   width: 160px;
   height: 160px;
-  margin: -20px auto var(--space-6);
+  margin: -40px auto var(--space-6);
   border-radius: 50%;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
