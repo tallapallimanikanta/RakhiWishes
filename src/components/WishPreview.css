@@ -12,17 +12,6 @@
   }
 }
 
-/* ── Flip Hint ── */
-
-.preview-flip-hint {
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  text-align: center;
-  margin-top: var(--space-1);
-  margin-bottom: 0;
-  animation: pulse 2s ease-in-out infinite;
-}
-
 /* ── Wrapper ── */
 
 .preview-wrapper {
@@ -37,67 +26,24 @@
 }
 
 /* ============================================
-   3D Flip Container
+   Preview Card
    ============================================ */
 
-.preview-card-container {
-  perspective: 1200px;
-  cursor: grab;
-  outline: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.preview-card-container:focus-visible {
-  outline: 2px solid var(--color-rakhi-pink);
-  outline-offset: 4px;
-  border-radius: var(--radius-2xl);
-}
-
-.preview-card-container--dragging {
-  cursor: grabbing;
-}
-
-.preview-card-inner {
+.preview-card {
   position: relative;
-  width: 100%;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-.preview-card-container--dragging .preview-card-inner {
-  transition: none;
-}
-
-.preview-card--front,
-.preview-card--back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* ============================================
-   Preview Card (Front — existing styles)
-   ============================================ */
-
-.preview-card--front {
   background: var(--color-bg-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-2xl);
   padding: var(--space-8) var(--space-6);
   text-align: center;
   overflow: hidden;
-  box-shadow:
-    rgba(0, 0, 0, 0.15) 0px 2px 4px,
-    rgba(0, 0, 0, 0.1) 0px 8px 16px -4px;
+  transition:
+    border-color var(--duration-normal) var(--ease-default),
+    box-shadow var(--duration-slow) var(--ease-default);
 }
 
 @media (min-width: 768px) {
-  .preview-card--front {
+  .preview-card {
     padding: var(--space-10) var(--space-8);
     border-radius: 32px;
   }
@@ -105,6 +51,7 @@
 
 .preview-card--active {
   border-color: var(--color-rakhi-pink-light);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ── Ornaments ── */
@@ -304,93 +251,4 @@
   width: 120px;
   height: 1px;
   background: var(--color-border);
-}
-
-/* ============================================
-   Preview Card (Back)
-   ============================================ */
-
-.preview-card--back {
-  background: linear-gradient(135deg, #FFF8F0 0%, #FFF0E8 100%);
-  border: 2px solid var(--color-rakhi-pink-light);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-10) var(--space-8);
-  transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    rgba(0, 0, 0, 0.15) 0px 2px 4px,
-    rgba(0, 0, 0, 0.1) 0px 8px 16px -4px;
-}
-
-@media (min-width: 768px) {
-  .preview-card--back {
-    border-radius: 32px;
-  }
-}
-
-.preview-card__back-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  text-align: center;
-}
-
-.preview-card__back-rakhi {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-}
-
-.preview-card__back-rakhi-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.preview-card__back-rakhi-circle {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.preview-card__back-rakhi-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-
-.preview-card__back-heading {
-  font-family: var(--font-script);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
-  color: var(--color-rakhi-pink);
-}
-
-.preview-card__back-greeting {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-  color: var(--color-text-primary);
-  margin-bottom: 0;
-}
-
-.preview-card__back-hint {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  max-width: 260px;
-  margin-bottom: 0;
-}
-
-.preview-card__back-ornament {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
 }
