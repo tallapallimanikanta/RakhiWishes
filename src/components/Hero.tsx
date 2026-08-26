@@ -21,8 +21,6 @@ function Hero() {
           </video>
         </div>
 
-        <p className="hero__eyebrow animate-fade-in">Raksha Bandhan 2026</p>
-
         <h1 className="hero__heading animate-fade-in-up">
           Send a Little Love<br />
           <span className="hero__heading-accent">This Raksha Bandhan</span>
