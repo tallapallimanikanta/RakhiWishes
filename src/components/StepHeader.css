@@ -25,6 +25,7 @@
   justify-content: center;
   width: 32px;
   height: 32px;
+  margin-right: var(--space-2);
   border-radius: var(--radius-full);
   border: 1.5px solid var(--color-border);
   background: var(--color-bg-surface);
@@ -71,9 +72,11 @@
 .step-header__progress {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-1);
   width: 100%;
-  max-width: 180px;
+  max-width: 200px;
+  margin: 0 auto;
 }
 
 .step-header__bar {
