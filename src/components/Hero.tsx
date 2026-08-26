@@ -3,23 +3,24 @@ import './Hero.css'
 function Hero() {
   return (
     <section className="hero">
-      {/* Background video */}
-      <video
-        className="hero__video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-      >
-        <source src="/Rakhi.mp4" type="video/mp4" />
-      </video>
-      <div className="hero__overlay" aria-hidden="true" />
-
       <div className="hero__decor hero__decor--left" aria-hidden="true" />
       <div className="hero__decor hero__decor--right" aria-hidden="true" />
 
       <div className="hero__content">
+        {/* Video above content */}
+        <div className="hero__video-wrapper animate-scale-in">
+          <video
+            className="hero__video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          >
+            <source src="/Rakhi.mp4" type="video/mp4" />
+          </video>
+        </div>
+
         <p className="hero__eyebrow animate-fade-in">Raksha Bandhan 2026</p>
 
         <h1 className="hero__heading animate-fade-in-up">
