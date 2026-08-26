@@ -1,24 +1,30 @@
 /* ============================================
-   Step Page Layout
+   Step Page Layout — fits screen perfectly
    ============================================ */
 
 .step-page {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--color-bg-primary);
+  overflow: hidden;
 }
 
 .step-page__content {
   flex: 1;
-  padding-top: var(--space-4);
-  padding-bottom: var(--space-8);
+  overflow-y: auto;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+  -webkit-overflow-scrolling: touch;
 }
 
 .step-page__action {
   text-align: center;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-light);
+  background: var(--color-bg-primary);
+  flex-shrink: 0;
 }
 
 .step-page__action .btn {
@@ -26,7 +32,7 @@
 }
 
 .step-page__hint {
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin-bottom: 0;

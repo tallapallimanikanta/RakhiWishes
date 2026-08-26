@@ -3,12 +3,12 @@
    ============================================ */
 
 .rakhi-section {
-  padding: var(--space-8) var(--space-4);
+  padding: var(--space-3) var(--space-4);
 }
 
 @media (min-width: 768px) {
   .rakhi-section {
-    padding: var(--space-10) var(--space-6);
+    padding: var(--space-4) var(--space-6);
   }
 }
 

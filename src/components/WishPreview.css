@@ -3,12 +3,12 @@
    ============================================ */
 
 .preview-section {
-  padding: var(--space-8) var(--space-4);
+  padding: var(--space-4) var(--space-4);
 }
 
 @media (min-width: 768px) {
   .preview-section {
-    padding: var(--space-10) var(--space-6);
+    padding: var(--space-4) var(--space-6);
   }
 }
 
@@ -34,7 +34,7 @@
   background: var(--color-bg-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-2xl);
-  padding: var(--space-8) var(--space-6);
+  padding: var(--space-5) var(--space-4);
   text-align: center;
   overflow: hidden;
   transition:
@@ -44,7 +44,7 @@
 
 @media (min-width: 768px) {
   .preview-card {
-    padding: var(--space-10) var(--space-8);
+    padding: var(--space-6) var(--space-8);
     border-radius: 32px;
   }
 }
@@ -107,12 +107,12 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-3);
 }
 
 .preview-card__ornament-bottom {
   margin-bottom: 0;
-  margin-top: var(--space-6);
+  margin-top: var(--space-3);
 }
 
 .preview-card__ornament-line {
@@ -140,12 +140,12 @@
 /* ── Rakhi Display ── */
 
 .preview-card__rakhi {
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-3);
 }
 
 .preview-card__rakhi-circle {
-  width: 88px;
-  height: 88px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -156,8 +156,8 @@
 
 @media (min-width: 768px) {
   .preview-card__rakhi-circle {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -209,10 +209,10 @@
 
 .preview-card__heading {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: var(--weight-bold);
   color: var(--color-rakhi-pink);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
   letter-spacing: var(--tracking-tight);
 }
 
@@ -226,16 +226,16 @@
 
 .preview-card__greeting {
   font-family: var(--font-heading);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: var(--weight-semibold);
   color: var(--color-text-primary);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
 }
 
 /* ── Message ── */
 
 .preview-card__message {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-3);
 }
 
 .preview-card__message-text {
@@ -268,7 +268,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: var(--space-2);
-  margin-top: var(--space-6);
+  margin-top: var(--space-3);
 }
 
 .preview-card__signature-text {
@@ -287,7 +287,7 @@
 /* ── Branding ── */
 
 .preview-card__brand {
-  margin-top: var(--space-6);
+  margin-top: var(--space-3);
   font-size: var(--text-xs);
   font-weight: var(--weight-medium);
   color: var(--color-text-muted);
