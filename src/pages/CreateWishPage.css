@@ -28,6 +28,12 @@
   padding-bottom: var(--space-4);
 }
 
+@media (max-width: 768px) {
+  .page-header__inner {
+    justify-content: center;
+  }
+}
+
 .page-header__logo {
   font-family: var(--font-heading);
   font-size: var(--text-xl);
