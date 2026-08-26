@@ -74,12 +74,7 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
     handleDragEnd()
   }, [handleDragEnd])
 
-  // Tap (no drag)
-  const handleTap = useCallback(() => {
-    if (Math.abs(dragOffset) < 5) {
-      setIsFlipped((prev) => !prev)
-    }
-  }, [dragOffset])
+
 
   // Calculate transform based on drag
   const frontTransform = isFlipped
@@ -103,7 +98,7 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
         <div
           ref={containerRef}
           className={`preview-card-container ${isFlipped ? 'preview-card-container--flipped' : ''} ${isDragging ? 'preview-card-container--dragging' : ''}`}
-          onClick={handleTap}
+
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
