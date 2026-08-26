@@ -35,8 +35,8 @@ function CreateWishPage({
       {/* Header */}
       <header className="page-header animate-fade-in">
         <div className="container page-header__inner">
-          <a href="/" className="page-header__logo" aria-label="Rakhi Wish">
-            Rakhi Wish
+          <a href="/" className="page-header__logo" aria-label="Rakhi Wishes">
+            Rakhi Wishes
           </a>
         </div>
       </header>

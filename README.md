@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="public/favicon.svg" alt="Rakhi Wish" width="80" />
+  <img src="public/favicon.svg" alt="Rakhi Wishes" width="80" />
 </p>
 
-<h1 align="center">Rakhi Wish</h1>
+<h1 align="center">Rakhi Wishes</h1>
 
 <p align="center">
   <strong>Digital Raksha Bandhan Letter Platform</strong><br/>
@@ -18,9 +18,9 @@
 
 ---
 
-## What is Rakhi Wish?
+## What is Rakhi Wishes?
 
-Rakhi Wish lets users create personalized digital Raksha Bandhan letters. Pick a Rakhi design, write a heartfelt message, and generate a shareable link. The recipient opens the link, sees an elegant animated greeting card, and taps to flip it open and read the message.
+Rakhi Wishes lets users create personalized digital Raksha Bandhan letters. Pick a Rakhi design, write a heartfelt message, and generate a shareable link. The recipient opens the link, sees an elegant animated greeting card, and taps to flip it open and read the message.
 
 ## Features
 
@@ -48,7 +48,7 @@ Rakhi Wish lets users create personalized digital Raksha Bandhan letters. Pick a
 ## Project Structure
 
 ```
-Rakhi Wish/
+Rakhi Wishes/
 ├── public/
 │   └── favicon.svg              # Custom Rakhi-themed favicon
 ├── server/
@@ -104,8 +104,8 @@ Rakhi Wish/
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/tallapallimanikanta/Rakhi Wish.git
-cd Rakhi Wish
+git clone https://github.com/tallapallimanikanta/Rakhi Wishes.git
+cd Rakhi Wishes
 npm install
 ```
 

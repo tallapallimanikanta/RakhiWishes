@@ -7,8 +7,8 @@ function HomePage() {
     <main className="create-wish-page">
       <header className="page-header animate-fade-in">
         <div className="container page-header__inner">
-          <span className="page-header__logo" aria-label="Rakhi Wish">
-            Rakhi Wish
+          <span className="page-header__logo" aria-label="Rakhi Wishes">
+            Rakhi Wishes
           </span>
           <ThemeToggle />
         </div>
