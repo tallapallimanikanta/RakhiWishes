@@ -155,7 +155,7 @@ function WishPage() {
       {/* Footer */}
       <footer className="wish-page__footer animate-fade-in delay-4">
         <Link to="/" className="wish-page__create-link">
-          Create your own wish →
+          Create your own greetings →
         </Link>
       </footer>
     </main>
