@@ -15,6 +15,7 @@ export interface WishData {
   id: string
   rakhiId: string
   recipientName: string
+  senderName: string
   message: string
   createdAt: string
 }
@@ -33,6 +34,7 @@ const headers = {
 export async function saveWish(
   rakhi: Rakhi,
   recipientName: string,
+  senderName: string,
   message: string,
   id: string
 ): Promise<WishData> {
@@ -43,6 +45,7 @@ export async function saveWish(
       id,
       rakhi_id: rakhi.id,
       recipient_name: recipientName.trim(),
+      sender_name: senderName.trim(),
       message: message.trim(),
     }),
   })
@@ -59,6 +62,7 @@ export async function saveWish(
     id: wish.id,
     rakhiId: wish.rakhi_id,
     recipientName: wish.recipient_name,
+    senderName: wish.sender_name ?? '',
     message: wish.message,
     createdAt: wish.created_at,
   }
@@ -86,6 +90,7 @@ export async function loadWish(id: string): Promise<WishData | null> {
     id: wish.id,
     rakhiId: wish.rakhi_id,
     recipientName: wish.recipient_name,
+    senderName: wish.sender_name ?? '',
     message: wish.message,
     createdAt: wish.created_at,
   }

@@ -5,6 +5,7 @@ import './LetterPage.css'
 interface LetterPageProps {
   selectedRakhi: Rakhi | null
   recipientName: string
+  senderName: string
   message: string
   onBack: () => void
   onShare: () => void
@@ -15,6 +16,7 @@ interface LetterPageProps {
 function LetterPage({
   selectedRakhi,
   recipientName,
+  senderName,
   message,
   onBack,
   onShare,
@@ -48,6 +50,7 @@ function LetterPage({
         <DigitalLetter
           selectedRakhi={selectedRakhi}
           recipientName={recipientName}
+          senderName={senderName}
           message={message}
         />
       </div>

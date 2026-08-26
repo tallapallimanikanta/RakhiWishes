@@ -135,6 +135,7 @@ function WishPage() {
         <DigitalLetter
           selectedRakhi={rakhi}
           recipientName={wishData?.recipientName ?? ''}
+          senderName={wishData?.senderName ?? ''}
           message={wishData?.message ?? ''}
         />
       </div>

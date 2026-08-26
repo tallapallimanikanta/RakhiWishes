@@ -336,6 +336,13 @@
   animation: pulse 2.5s var(--ease-in-out) infinite;
 }
 
+.letter-front__rakhi-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .letter-front__rakhi-center {
   width: 36px;
   height: 36px;
@@ -659,6 +666,13 @@
   font-size: var(--text-base);
   font-style: italic;
   color: var(--color-text-secondary);
+}
+
+.letter-back__signature-name {
+  font-family: var(--font-script);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
 }
 
 .letter-back__signature-line {

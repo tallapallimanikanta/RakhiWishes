@@ -1,15 +1,15 @@
-import type { Rakhi } from '../data/rakhis'
 import './DigitalLetter.css'
 
 interface LetterBackProps {
-  selectedRakhi: Rakhi | null
   recipientName: string
+  senderName: string
   message: string
 }
 
-function LetterBack({ selectedRakhi, recipientName, message }: LetterBackProps) {
+function LetterBack({ recipientName, senderName, message }: LetterBackProps) {
   const displayName = recipientName.trim() || '[Name]'
   const displayMessage = message.trim()
+  const displaySender = senderName.trim() || 'Your Name'
 
   return (
     <div className="letter-back">
@@ -33,13 +33,11 @@ function LetterBack({ selectedRakhi, recipientName, message }: LetterBackProps) 
       {/* Top ornament */}
       <div className="letter-back__ornament" aria-hidden="true">
         <span className="letter-back__ornament-line" />
-        <span className="letter-back__ornament-star">✦</span>
         <span className="letter-back__ornament-diamond" />
-        <span className="letter-back__ornament-star">✦</span>
         <span className="letter-back__ornament-line" />
       </div>
 
-      {/* Message content — staggered fade-in */}
+      {/* Message content */}
       <div className="letter-back__content">
         {/* Greeting */}
         <p className="letter-back__greeting letter-back__reveal letter-back__reveal--1">
@@ -65,6 +63,7 @@ function LetterBack({ selectedRakhi, recipientName, message }: LetterBackProps) 
         {/* Signature */}
         <div className="letter-back__signature letter-back__reveal letter-back__reveal--4">
           <span className="letter-back__signature-text">With love,</span>
+          <span className="letter-back__signature-name">{displaySender}</span>
           <span className="letter-back__signature-line" />
         </div>
       </div>
@@ -75,28 +74,6 @@ function LetterBack({ selectedRakhi, recipientName, message }: LetterBackProps) 
         <span className="letter-back__ornament-diamond" />
         <span className="letter-back__ornament-line" />
       </div>
-
-      {/* Branding */}
-      <p className="letter-back__brand letter-back__reveal letter-back__reveal--5">
-        Sent with love via Rakhi Wish
-      </p>
-
-      {/* Small Rakhi */}
-      {selectedRakhi && (
-        <div className="letter-back__rakhi-small letter-back__reveal letter-back__reveal--5" aria-hidden="true">
-          <div
-            className="letter-back__rakhi-small-circle"
-            style={{ background: selectedRakhi.gradient }}
-          >
-            <div className="letter-back__rakhi-small-center">
-              <div
-                className="letter-back__rakhi-small-dot"
-                style={{ backgroundColor: selectedRakhi.accentColor }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

@@ -7,12 +7,14 @@ import './DigitalLetter.css'
 interface DigitalLetterProps {
   selectedRakhi: Rakhi | null
   recipientName: string
+  senderName: string
   message: string
 }
 
 function DigitalLetter({
   selectedRakhi,
   recipientName,
+  senderName,
   message,
 }: DigitalLetterProps) {
   const [isFlipped, setIsFlipped] = useState(false)
@@ -77,8 +79,8 @@ function DigitalLetter({
           {/* Back side */}
           <div className="digital-letter__face digital-letter__face--back">
             <LetterBack
-              selectedRakhi={selectedRakhi}
               recipientName={recipientName}
+              senderName={senderName}
               message={message}
             />
           </div>

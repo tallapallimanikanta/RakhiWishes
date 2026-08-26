@@ -35,20 +35,25 @@ function LetterFront({ selectedRakhi, recipientName }: LetterFrontProps) {
               className="letter-front__rakhi-circle"
               style={{ background: selectedRakhi.gradient }}
             >
-              <div className="letter-front__rakhi-center">
-                <div
-                  className="letter-front__rakhi-dot"
-                  style={{ backgroundColor: selectedRakhi.accentColor }}
+              {selectedRakhi.image ? (
+                <img
+                  src={selectedRakhi.image}
+                  alt=""
+                  className="letter-front__rakhi-image"
                 />
-              </div>
-              {/* Thread ends */}
-              <span className="letter-front__thread letter-front__thread--left" style={{ backgroundColor: selectedRakhi.accentColor }} aria-hidden="true" />
-              <span className="letter-front__thread letter-front__thread--right" style={{ backgroundColor: selectedRakhi.accentColor }} aria-hidden="true" />
+              ) : (
+                <div className="letter-front__rakhi-center">
+                  <div
+                    className="letter-front__rakhi-dot"
+                    style={{ backgroundColor: selectedRakhi.accentColor }}
+                  />
+                </div>
+              )}
             </div>
           ) : (
             <div className="letter-front__rakhi-circle letter-front__rakhi-circle--empty">
               <div className="letter-front__rakhi-center">
-                <span className="letter-front__rakhi-question">✦</span>
+                <span className="letter-front__rakhi-question">?</span>
               </div>
             </div>
           )}
@@ -61,25 +66,10 @@ function LetterFront({ selectedRakhi, recipientName }: LetterFrontProps) {
 
         {/* Recipient */}
         <p className="letter-front__greeting">
-          to you,
-          <br />
-          <span className="letter-front__name">
-            {recipientName.trim() || '[Name]'}
-          </span>
-        </p>
-
-        {/* Decorative flourish */}
-        <div className="letter-front__flourish" aria-hidden="true">
-          <span className="letter-front__flourish-line" />
-          <span className="letter-front__flourish-diamond" />
-          <span className="letter-front__flourish-diamond letter-front__flourish-diamond--small" />
-          <span className="letter-front__flourish-diamond" />
-          <span className="letter-front__flourish-line" />
-        </div>
-
-        {/* Subtitle */}
-        <p className="letter-front__subtitle">
-          A special bond of love and protection
+          {recipientName.trim()
+            ? `Dear ${recipientName.trim()},`
+            : 'Dear [Name],'
+          }
         </p>
       </div>
 

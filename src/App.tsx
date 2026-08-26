@@ -67,14 +67,14 @@ function CreateFlowProvider({ children }: { children: React.ReactNode }) {
     setSaveError(null)
     try {
       const wishId = generateWishId()
-      await saveWish(selectedRakhi, recipientName, message, wishId)
+      await saveWish(selectedRakhi, recipientName, senderName, message, wishId)
       window.location.href = `/wish/${wishId}`
     } catch {
       setSaveError('Failed to save your wish. Please try again.')
     } finally {
       setIsSaving(false)
     }
-  }, [selectedRakhi, recipientName, message])
+  }, [selectedRakhi, recipientName, senderName, message])
 
   return (
     <CreateFlowContext.Provider
