@@ -1,0 +1,133 @@
+/* ============================================
+   Wish Page — Recipient View
+   ============================================ */
+
+.wish-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ── Loading / Error States ── */
+
+.wish-page--loading,
+.wish-page--error {
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-primary) 0%,
+    var(--color-bg-secondary) 100%
+  );
+}
+
+.wish-page__status {
+  text-align: center;
+  max-width: 400px;
+  padding: var(--space-6);
+}
+
+.wish-page__loading-circle {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-rakhi-pink);
+  border-radius: 50%;
+  margin: 0 auto var(--space-6);
+  animation: spin 1s linear infinite;
+}
+
+.wish-page__status-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-bg-surface);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+}
+
+.wish-page__status-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.wish-page__status-text {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+/* ── Found — Letter View ── */
+
+.wish-page--found {
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-primary) 0%,
+    var(--color-bg-secondary) 100%
+  );
+}
+
+.wish-page__letter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+/* ── Share Section ── */
+
+.wish-page__share {
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+}
+
+.wish-page__share .divider {
+  max-width: 200px;
+  margin: 0 auto var(--space-6);
+}
+
+.wish-page__share-text {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ── Footer ── */
+
+.wish-page__footer {
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.wish-page__create-link {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-rakhi-pink);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.wish-page__create-link:hover {
+  color: var(--color-rakhi-pink-dark);
+  text-decoration: underline;
+}
+
+.wish-page__create-link:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

@@ -1,0 +1,196 @@
+/* ============================================
+   RakhiWishes Global Styles
+   ============================================ */
+
+/* ── Reset ── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Typography ── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-extrabold);
+}
+
+h2 {
+  font-size: var(--text-3xl);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+}
+
+h4 {
+  font-size: var(--text-xl);
+}
+
+h5 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+h6 {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+strong {
+  font-weight: var(--weight-semibold);
+}
+
+small {
+  font-size: var(--text-sm);
+}
+
+a {
+  color: var(--color-rakhi-pink);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+a:hover {
+  color: var(--color-rakhi-pink-dark);
+}
+
+/* ── Focus States (Accessibility) ── */
+
+:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Images ── */
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Lists ── */
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ── Forms Reset ── */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ── Tables ── */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ── Selection ── */
+
+::selection {
+  background-color: var(--color-rakhi-pink-light);
+  color: var(--color-text-primary);
+}
+
+/* ── Scrollbar (subtle) ── */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* ── Utility: Screen Reader Only ── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

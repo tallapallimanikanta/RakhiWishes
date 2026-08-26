@@ -1,0 +1,78 @@
+/* ============================================
+   Letter Page — Full-screen view
+   ============================================ */
+
+.letter-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-primary) 0%,
+    var(--color-bg-secondary) 100%
+  );
+}
+
+/* ── Header ── */
+
+.letter-page__header {
+  padding: var(--space-4) var(--space-4);
+  display: flex;
+  align-items: center;
+}
+
+.letter-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  transition: var(--transition-colors);
+}
+
+.letter-page__back:hover {
+  color: var(--color-text-primary);
+  background: var(--color-border-light);
+}
+
+.letter-page__back:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 2px;
+}
+
+/* ── Body ── */
+
+.letter-page__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+/* ── Footer ── */
+
+.letter-page__footer {
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.letter-page__hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.letter-page__share-btn {
+  min-width: 200px;
+}
+
+.letter-page__error {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  margin-bottom: var(--space-3);
+}

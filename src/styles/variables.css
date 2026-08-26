@@ -1,0 +1,150 @@
+/* ============================================
+   RakhiWishes Design Tokens
+   ============================================ */
+
+:root {
+  /* ── Color Palette ── */
+
+  /* Backgrounds */
+  --color-bg-primary: #FFF8F0;        /* Warm cream */
+  --color-bg-secondary: #FFFBF5;      /* Lighter cream */
+  --color-bg-surface: #FFFFFF;         /* White cards */
+  --color-bg-elevated: #FFFCF7;        /* Slightly warm white */
+
+  /* Brand */
+  --color-rakhi-pink: #D94F7A;        /* Primary brand — elegant pink-red */
+  --color-rakhi-pink-light: #F2A6BF;  /* Light pink for subtle fills */
+  --color-rakhi-pink-dark: #B83D63;   /* Darker pink for hover */
+  --color-gold: #C89B3C;             /* Warm gold accent */
+  --color-gold-light: #E8D48B;       /* Light gold for subtle fills */
+  --color-gold-dark: #A67D2E;        /* Darker gold for hover */
+  --color-orange-soft: #E8945A;      /* Warm orange accent */
+  --color-orange-light: #F5C9A0;     /* Light orange */
+
+  /* Text */
+  --color-text-primary: #2D1F14;     /* Dark brown — main text */
+  --color-text-secondary: #6B5B4E;   /* Medium brown — secondary text */
+  --color-text-muted: #9C8E82;       /* Muted brown — placeholders, captions */
+  --color-text-inverse: #FFFBF5;     /* Light text on dark backgrounds */
+
+  /* Borders & Dividers */
+  --color-border: #E8DDD0;           /* Warm light border */
+  --color-border-light: #F0E8DC;     /* Very subtle border */
+  --color-divider: #EDE5D8;          /* Section dividers */
+
+  /* Feedback */
+  --color-success: #5B9A6F;
+  --color-error: #D94F4F;
+  --color-warning: #E8945A;
+
+  /* ── Typography ── */
+
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  /* Font Sizes (fluid) */
+  --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);       /* 11-12px */
+  --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);      /* 13-14px */
+  --text-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);        /* 14-16px */
+  --text-lg: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);          /* 16-18px */
+  --text-xl: clamp(1.15rem, 1rem + 0.75vw, 1.3rem);          /* 18-21px */
+  --text-2xl: clamp(1.4rem, 1.1rem + 1.5vw, 1.75rem);       /* 22-28px */
+  --text-3xl: clamp(1.8rem, 1.3rem + 2.5vw, 2.5rem);        /* 29-40px */
+  --text-4xl: clamp(2.2rem, 1.5rem + 3.5vw, 3.25rem);       /* 35-52px */
+  --text-5xl: clamp(2.8rem, 1.8rem + 5vw, 4rem);            /* 45-64px */
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+
+  /* ── Spacing System (8px base) ── */
+
+  --space-0: 0;
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+  --space-32: 8rem;      /* 128px */
+
+  /* ── Border Radius ── */
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+
+  --shadow-xs: 0 1px 2px rgba(45, 31, 20, 0.04);
+  --shadow-sm: 0 1px 3px rgba(45, 31, 20, 0.06), 0 1px 2px rgba(45, 31, 20, 0.04);
+  --shadow-md: 0 4px 6px rgba(45, 31, 20, 0.05), 0 2px 4px rgba(45, 31, 20, 0.04);
+  --shadow-lg: 0 10px 20px rgba(45, 31, 20, 0.06), 0 4px 8px rgba(45, 31, 20, 0.04);
+  --shadow-xl: 0 20px 40px rgba(45, 31, 20, 0.08), 0 8px 16px rgba(45, 31, 20, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(45, 31, 20, 0.12);
+  --shadow-glow-pink: 0 0 20px rgba(217, 79, 122, 0.2);
+  --shadow-glow-gold: 0 0 20px rgba(200, 155, 60, 0.2);
+
+  /* ── Animation Timing ── */
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --transition-colors: color var(--duration-normal) var(--ease-default),
+                        background-color var(--duration-normal) var(--ease-default),
+                        border-color var(--duration-normal) var(--ease-default);
+  --transition-shadow: box-shadow var(--duration-normal) var(--ease-default);
+  --transition-transform: transform var(--duration-normal) var(--ease-default);
+  --transition-all: all var(--duration-normal) var(--ease-default);
+
+  /* ── Layout ── */
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1440px;
+
+  /* Z-index scale */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}

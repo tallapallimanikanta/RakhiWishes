@@ -1,0 +1,34 @@
+/* ============================================
+   Share Buttons
+   ============================================ */
+
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+@media (min-width: 480px) {
+  .share-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.share-btn {
+  min-width: 180px;
+  justify-content: center;
+}
+
+.share-btn--copied {
+  border-color: var(--color-success) !important;
+  color: var(--color-success) !important;
+}
+
+.share-buttons__fallback {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-bottom: 0;
+}

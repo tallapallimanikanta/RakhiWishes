@@ -1,0 +1,115 @@
+/* ============================================
+   Hero Section
+   ============================================ */
+
+.hero {
+  position: relative;
+  padding: var(--space-12) var(--space-4) var(--space-10);
+  text-align: center;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: var(--space-16) var(--space-6) var(--space-12);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: var(--space-20) var(--space-8) var(--space-16);
+  }
+}
+
+/* ── Decorative Orbs ── */
+
+.hero__decor {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.15;
+}
+
+.hero__decor--left {
+  width: 300px;
+  height: 300px;
+  background: var(--color-rakhi-pink);
+  top: -80px;
+  left: -80px;
+  animation: gentleFloat 6s var(--ease-in-out) infinite;
+}
+
+.hero__decor--right {
+  width: 250px;
+  height: 250px;
+  background: var(--color-gold);
+  bottom: -60px;
+  right: -60px;
+  animation: gentleFloat 6s var(--ease-in-out) infinite reverse;
+}
+
+@media (min-width: 768px) {
+  .hero__decor--left {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    left: -100px;
+  }
+
+  .hero__decor--right {
+    width: 350px;
+    height: 350px;
+    bottom: -80px;
+    right: -80px;
+  }
+}
+
+/* ── Content ── */
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  padding: var(--space-1) var(--space-4);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-rakhi-pink);
+  background-color: rgba(217, 79, 122, 0.08);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(217, 79, 122, 0.15);
+}
+
+.hero__heading {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-extrabold);
+  line-height: var(--leading-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-5);
+}
+
+.hero__heading-accent {
+  color: var(--color-rakhi-pink);
+}
+
+.hero__subtext {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .hero__subtext-break {
+    display: none;
+  }
+}

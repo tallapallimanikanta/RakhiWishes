@@ -1,0 +1,297 @@
+/* ============================================
+   Wish Preview Section
+   ============================================ */
+
+.preview-section {
+  padding: var(--space-8) var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .preview-section {
+    padding: var(--space-10) var(--space-6);
+  }
+}
+
+/* ── Wrapper ── */
+
+.preview-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .preview-wrapper {
+    max-width: 520px;
+  }
+}
+
+/* ============================================
+   Preview Card (Letter)
+   ============================================ */
+
+.preview-card {
+  position: relative;
+  background: var(--color-bg-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  overflow: hidden;
+  transition:
+    border-color var(--duration-normal) var(--ease-default),
+    box-shadow var(--duration-slow) var(--ease-default);
+}
+
+@media (min-width: 768px) {
+  .preview-card {
+    padding: var(--space-10) var(--space-8);
+    border-radius: 32px;
+  }
+}
+
+.preview-card--active {
+  border-color: var(--color-rakhi-pink-light);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Decorative Corners ── */
+
+.preview-card__corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--color-gold-light);
+  border-style: solid;
+  opacity: 0.5;
+  transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+.preview-card--active .preview-card__corner {
+  opacity: 0.8;
+  border-color: var(--color-gold);
+}
+
+.preview-card__corner--tl {
+  top: 12px;
+  left: 12px;
+  border-width: 2px 0 0 2px;
+  border-radius: 4px 0 0 0;
+}
+
+.preview-card__corner--tr {
+  top: 12px;
+  right: 12px;
+  border-width: 2px 2px 0 0;
+  border-radius: 0 4px 0 0;
+}
+
+.preview-card__corner--bl {
+  bottom: 12px;
+  left: 12px;
+  border-width: 0 0 2px 2px;
+  border-radius: 0 0 0 4px;
+}
+
+.preview-card__corner--br {
+  bottom: 12px;
+  right: 12px;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 4px 0;
+}
+
+/* ── Ornaments ── */
+
+.preview-card__ornament-top,
+.preview-card__ornament-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.preview-card__ornament-bottom {
+  margin-bottom: 0;
+  margin-top: var(--space-6);
+}
+
+.preview-card__ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold-light) 30%,
+    var(--color-gold-light) 70%,
+    transparent
+  );
+  max-width: 80px;
+}
+
+.preview-card__ornament-diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Rakhi Display ── */
+
+.preview-card__rakhi {
+  margin-bottom: var(--space-5);
+}
+
+.preview-card__rakhi-circle {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--duration-slow) var(--ease-spring);
+}
+
+@media (min-width: 768px) {
+  .preview-card__rakhi-circle {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.preview-card--active .preview-card__rakhi-circle {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-xl);
+}
+
+.preview-card__rakhi-circle--empty {
+  background: var(--color-bg-secondary);
+  border: 2px dashed var(--color-border);
+  box-shadow: none;
+}
+
+.preview-card__rakhi-center {
+  width: 32px;
+  height: 32px;
+  background: var(--color-bg-surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.preview-card__rakhi-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.preview-card--active .preview-card__rakhi-dot {
+  transform: scale(1.15);
+}
+
+.preview-card__rakhi-question {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+}
+
+.preview-card__rakhi-placeholder {
+  display: inline-block;
+  animation: pulse 2.5s var(--ease-in-out) infinite;
+}
+
+/* ── Heading ── */
+
+.preview-card__heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-rakhi-pink);
+  margin-bottom: var(--space-4);
+  letter-spacing: var(--tracking-tight);
+}
+
+@media (min-width: 768px) {
+  .preview-card__heading {
+    font-size: var(--text-3xl);
+  }
+}
+
+/* ── Greeting ── */
+
+.preview-card__greeting {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+/* ── Message ── */
+
+.preview-card__message {
+  margin-bottom: var(--space-6);
+}
+
+.preview-card__message-text {
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .preview-card__message-text {
+    font-size: var(--text-lg);
+  }
+}
+
+/* ── Placeholder ── */
+
+.preview-card__placeholder-text {
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* ── Signature ── */
+
+.preview-card__signature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.preview-card__signature-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.preview-card__signature-line {
+  width: 120px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Branding ── */
+
+.preview-card__brand {
+  margin-top: var(--space-6);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: 0;
+}

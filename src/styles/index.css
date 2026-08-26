@@ -1,0 +1,9 @@
+/* ============================================
+   RakhiWishes Design System
+   Import all styles in the correct order
+   ============================================ */
+
+@import './variables.css';
+@import './global.css';
+@import './components.css';
+@import './animations.css';
