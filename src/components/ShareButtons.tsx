@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import './ShareButtons.css'
 
-/* ── Icon Components ── */
-
 function CopyIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -30,8 +28,6 @@ function ShareIcon() {
   )
 }
 
-/* ── Main Component ── */
-
 interface ShareButtonsProps {
   wishUrl: string
   recipientName: string
@@ -39,13 +35,7 @@ interface ShareButtonsProps {
 
 function ShareButtons({ wishUrl, recipientName }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
-  const [showApps, setShowApps] = useState(false)
 
-  const shareText = `Happy Raksha Bandhan, ${recipientName}! 🎀 Here's a special wish for you:`
-  const encodedText = encodeURIComponent(shareText)
-  const encodedUrl = encodeURIComponent(wishUrl)
-
-  /* ── Copy to clipboard ── */
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(wishUrl)
@@ -65,83 +55,35 @@ function ShareButtons({ wishUrl, recipientName }: ShareButtonsProps) {
     }
   }, [wishUrl])
 
-  /* ── Web Share API ── */
   const handleShare = useCallback(async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title: `Rakhi Wish for ${recipientName}`,
-          text: shareText,
+          text: `Happy Raksha Bandhan, ${recipientName}! 🎀 Here's a special wish for you:`,
           url: wishUrl,
         })
-        return
       } catch {
-        // User cancelled or failed — show app links
+        // User cancelled
       }
+    } else {
+      handleCopy()
     }
-    // Fallback: show app-specific share links
-    setShowApps((prev) => !prev)
-  }, [wishUrl, recipientName, shareText])
+  }, [wishUrl, recipientName, handleCopy])
 
   return (
     <div className="share-buttons" role="group" aria-label="Share wish">
-      <button
-        className="btn btn-primary share-btn"
-        onClick={handleShare}
-        aria-label="Share this wish"
-      >
+      <button className="btn btn-primary share-btn" onClick={handleShare}>
         <ShareIcon />
         Share
       </button>
-
       <button
         className={`btn btn-secondary share-btn ${copied ? 'share-btn--copied' : ''}`}
         onClick={handleCopy}
-        aria-label={copied ? 'Link copied' : 'Copy wish link'}
       >
         {copied ? <CheckIcon /> : <CopyIcon />}
         {copied ? 'Copied!' : 'Copy Link'}
       </button>
-
-      {/* App-specific share links */}
-      {showApps && (
-        <div className="share-apps">
-          <a
-            className="share-app"
-            href={`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="share-app__icon">💬</span>
-            <span className="share-app__name">WhatsApp</span>
-          </a>
-          <a
-            className="share-app"
-            href={`https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="share-app__icon">✈️</span>
-            <span className="share-app__name">Telegram</span>
-          </a>
-          <a
-            className="share-app"
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="share-app__icon">📘</span>
-            <span className="share-app__name">Facebook</span>
-          </a>
-          <a
-            className="share-app"
-            href={`mailto:?subject=Raksha Bandhan Wish for ${encodeURIComponent(recipientName)}&body=${encodedText}%0A%0A${encodedUrl}`}
-          >
-            <span className="share-app__icon">📧</span>
-            <span className="share-app__name">Email</span>
-          </a>
-        </div>
-      )}
     </div>
   )
 }
