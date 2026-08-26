@@ -4,6 +4,7 @@ import CreateWishPage from './pages/CreateWishPage'
 import LetterPage from './pages/LetterPage'
 import WishPage from './pages/WishPage'
 import LoadingScreen from './components/LoadingScreen'
+import { ThemeProvider } from './hooks/useTheme'
 import { generateWishId } from './utils/wishId'
 import { saveWish } from './utils/wishStore'
 import type { Rakhi } from './data/rakhis'
@@ -79,6 +80,7 @@ function App() {
   return (
     <>
     <LoadingScreen />
+    <ThemeProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<CreateFlow />} />
@@ -86,6 +88,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
     </>
   )
 }

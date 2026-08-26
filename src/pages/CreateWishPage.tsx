@@ -2,6 +2,7 @@ import Hero from '../components/Hero'
 import RakhiSelection from '../components/RakhiSelection'
 import WishForm from '../components/WishForm'
 import WishPreview from '../components/WishPreview'
+import ThemeToggle from '../components/ThemeToggle'
 import type { Rakhi } from '../data/rakhis'
 import './CreateWishPage.css'
 
@@ -37,6 +38,7 @@ function CreateWishPage({
           <span className="page-header__logo" aria-label="Rakhi Wish">
             Rakhi Wish
           </span>
+          <ThemeToggle />
         </div>
       </header>
 
