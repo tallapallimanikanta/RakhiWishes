@@ -126,7 +126,6 @@
 }
 
 .hero__subtext {
-  font-family: var(--font-marker);
   font-size: var(--text-lg);
   font-weight: var(--weight-regular);
   line-height: var(--leading-relaxed);
