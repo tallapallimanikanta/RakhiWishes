@@ -1,0 +1,48 @@
+/* ============================================
+   Loading Screen
+   ============================================ */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-primary);
+  transition: opacity 0.5s var(--ease-default);
+}
+
+.loading-screen--fade {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.loading-screen__gif {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .loading-screen__gif {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.loading-screen__text {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-bottom: 0;
+}

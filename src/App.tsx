@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import CreateWishPage from './pages/CreateWishPage'
 import LetterPage from './pages/LetterPage'
 import WishPage from './pages/WishPage'
+import LoadingScreen from './components/LoadingScreen'
 import { generateWishId } from './utils/wishId'
 import { saveWish } from './utils/wishStore'
 import type { Rakhi } from './data/rakhis'
@@ -76,6 +77,8 @@ function CreateFlow() {
 
 function App() {
   return (
+    <>
+    <LoadingScreen />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<CreateFlow />} />
@@ -83,6 +86,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    </>
   )
 }
 
