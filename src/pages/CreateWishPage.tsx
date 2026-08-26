@@ -1,4 +1,3 @@
-import Hero from '../components/Hero'
 import RakhiSelection from '../components/RakhiSelection'
 import WishForm from '../components/WishForm'
 import WishPreview from '../components/WishPreview'
@@ -35,21 +34,15 @@ function CreateWishPage({
       {/* Header */}
       <header className="page-header animate-fade-in">
         <div className="container page-header__inner">
-          <span className="page-header__logo" aria-label="Rakhi Wish">
+          <a href="/" className="page-header__logo" aria-label="Rakhi Wish">
             Rakhi Wish
-          </span>
+          </a>
           <ThemeToggle />
         </div>
       </header>
 
       <div className="container">
-        {/* Hero */}
-        <Hero />
-
-        {/* Divider */}
-        <hr className="divider divider-ornate" aria-hidden="true" />
-
-        {/* Rakhi Selection */}
+        {/* Rakhi Selection — at top */}
         <RakhiSelection onSelect={onRakhiSelect} />
 
         {/* Divider */}
