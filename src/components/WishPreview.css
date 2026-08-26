@@ -12,6 +12,17 @@
   }
 }
 
+/* ── Flip Hint ── */
+
+.preview-flip-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--space-1);
+  margin-bottom: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
 /* ── Wrapper ── */
 
 .preview-wrapper {
@@ -26,7 +37,48 @@
 }
 
 /* ============================================
-   Preview Card (Letter)
+   3D Flip Container
+   ============================================ */
+
+.preview-card-container {
+  perspective: 1200px;
+  cursor: pointer;
+  outline: none;
+}
+
+.preview-card-container:focus-visible {
+  outline: 2px solid var(--color-rakhi-pink);
+  outline-offset: 4px;
+  border-radius: var(--radius-2xl);
+}
+
+.preview-card--front,
+.preview-card--back {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.preview-card--front {
+  transform: rotateY(0deg);
+}
+
+.preview-card--back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+.preview-card-container--flipped .preview-card--front {
+  transform: rotateY(-180deg);
+}
+
+.preview-card-container--flipped .preview-card--back {
+  transform: rotateY(0deg);
+}
+
+/* ============================================
+   Preview Card (Front)
    ============================================ */
 
 .preview-card {
@@ -42,6 +94,10 @@
     box-shadow var(--duration-slow) var(--ease-default);
 }
 
+.preview-card--front {
+  min-height: 400px;
+}
+
 @media (min-width: 768px) {
   .preview-card {
     padding: var(--space-6) var(--space-8);
@@ -52,51 +108,6 @@
 .preview-card--active {
   border-color: var(--color-rakhi-pink-light);
   box-shadow: var(--shadow-lg);
-}
-
-/* ── Decorative Corners ── */
-
-.preview-card__corner {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  border-color: var(--color-gold-light);
-  border-style: solid;
-  opacity: 0.5;
-  transition: opacity var(--duration-normal) var(--ease-default);
-}
-
-.preview-card--active .preview-card__corner {
-  opacity: 0.8;
-  border-color: var(--color-gold);
-}
-
-.preview-card__corner--tl {
-  top: 12px;
-  left: 12px;
-  border-width: 2px 0 0 2px;
-  border-radius: 4px 0 0 0;
-}
-
-.preview-card__corner--tr {
-  top: 12px;
-  right: 12px;
-  border-width: 2px 2px 0 0;
-  border-radius: 0 4px 0 0;
-}
-
-.preview-card__corner--bl {
-  bottom: 12px;
-  left: 12px;
-  border-width: 0 0 2px 2px;
-  border-radius: 0 0 0 4px;
-}
-
-.preview-card__corner--br {
-  bottom: 12px;
-  right: 12px;
-  border-width: 0 2px 2px 0;
-  border-radius: 0 0 4px 0;
 }
 
 /* ── Ornaments ── */
@@ -296,6 +307,83 @@
   width: 120px;
   height: 1px;
   background: var(--color-border);
+}
+
+/* ============================================
+   Preview Card (Back)
+   ============================================ */
+
+.preview-card--back {
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFF0E8 100%);
+  border-color: var(--color-rakhi-pink-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-card__back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.preview-card__back-rakhi {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.preview-card__back-rakhi-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-card__back-rakhi-circle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-card__back-rakhi-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.preview-card__back-heading {
+  font-family: var(--font-script);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-rakhi-pink);
+}
+
+.preview-card__back-greeting {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+}
+
+.preview-card__back-hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: 260px;
+  margin-bottom: 0;
+}
+
+.preview-card__back-ornament {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
 }
 
 /* ── Branding ── */

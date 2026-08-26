@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Rakhi } from '../data/rakhis'
 import './WishPreview.css'
 
@@ -9,7 +10,10 @@ interface WishPreviewProps {
 }
 
 function WishPreview({ selectedRakhi, recipientName, senderName, message }: WishPreviewProps) {
+  const [isFlipped, setIsFlipped] = useState(false)
   const hasContent = selectedRakhi !== null || recipientName.trim().length > 0 || message.trim().length > 0
+
+  const handleFlip = () => setIsFlipped((prev) => !prev)
 
   return (
     <section className="preview-section" aria-labelledby="preview-title">
@@ -17,91 +21,135 @@ function WishPreview({ selectedRakhi, recipientName, senderName, message }: Wish
         <h2 id="preview-title" className="section-title">
           Live Preview
         </h2>
+        <p className="preview-flip-hint">Tap the card to flip</p>
       </div>
 
       <div className="preview-wrapper animate-fade-in-up delay-1">
-        <div className={`preview-card ${hasContent ? 'preview-card--active' : ''}`}>
-          {/* Top ornament */}
-          <div className="preview-card__ornament-top" aria-hidden="true">
-            <span className="preview-card__ornament-line" />
-            <span className="preview-card__ornament-diamond" />
-            <span className="preview-card__ornament-line" />
+        <div
+          className={`preview-card-container ${isFlipped ? 'preview-card-container--flipped' : ''}`}
+          onClick={handleFlip}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleFlip() }}
+          role="button"
+          tabIndex={0}
+          aria-label={isFlipped ? 'Flip to front' : 'Flip to back'}
+        >
+          {/* ── Front Side ── */}
+          <div className={`preview-card preview-card--front ${hasContent ? 'preview-card--active' : ''}`}>
+            {/* Top ornament */}
+            <div className="preview-card__ornament-top" aria-hidden="true">
+              <span className="preview-card__ornament-line" />
+              <span className="preview-card__ornament-diamond" />
+              <span className="preview-card__ornament-line" />
+            </div>
+
+            {/* Rakhi display */}
+            <div className="preview-card__rakhi">
+              {selectedRakhi ? (
+                <div
+                  className="preview-card__rakhi-circle"
+                  style={{ background: selectedRakhi.gradient }}
+                >
+                  {selectedRakhi.image ? (
+                    <img
+                      src={selectedRakhi.image}
+                      alt=""
+                      className="preview-card__rakhi-image"
+                    />
+                  ) : (
+                    <div className="preview-card__rakhi-center">
+                      <div
+                        className="preview-card__rakhi-dot"
+                        style={{ backgroundColor: selectedRakhi.accentColor }}
+                      />
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="preview-card__rakhi-placeholder">
+                  <div className="preview-card__rakhi-circle preview-card__rakhi-circle--empty">
+                    <div className="preview-card__rakhi-center">
+                      <span className="preview-card__rakhi-question">?</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Heading */}
+            <h3 className="preview-card__heading">
+              Happy Raksha Bandhan
+            </h3>
+
+            {/* Recipient name */}
+            <p className="preview-card__greeting">
+              {recipientName.trim()
+                ? `Dear ${recipientName.trim()},`
+                : <span className="preview-card__placeholder-text">Dear [Name],</span>
+              }
+            </p>
+
+            {/* Message */}
+            <div className="preview-card__message">
+              {message.trim() ? (
+                <p className="preview-card__message-text">{message.trim()}</p>
+              ) : (
+                <p className="preview-card__placeholder-text">
+                  Your heartfelt message will appear here...
+                </p>
+              )}
+            </div>
+
+            {/* Signature line */}
+            <div className="preview-card__signature">
+              <span className="preview-card__signature-text">With love,</span>
+              <span className="preview-card__signature-name">
+                {senderName.trim() || <span className="preview-card__placeholder-text">Your Name</span>}
+              </span>
+              <span className="preview-card__signature-line" />
+            </div>
+
+            {/* Bottom ornament */}
+            <div className="preview-card__ornament-bottom" aria-hidden="true">
+              <span className="preview-card__ornament-line" />
+              <span className="preview-card__ornament-diamond" />
+              <span className="preview-card__ornament-line" />
+            </div>
           </div>
 
-          {/* Rakhi display */}
-          <div className="preview-card__rakhi">
-            {selectedRakhi ? (
-              <div
-                className="preview-card__rakhi-circle"
-                style={{ background: selectedRakhi.gradient }}
-              >
-                {selectedRakhi.image ? (
-                  <img
-                    src={selectedRakhi.image}
-                    alt=""
-                    className="preview-card__rakhi-image"
-                  />
+          {/* ── Back Side ── */}
+          <div className="preview-card preview-card--back">
+            <div className="preview-card__back-content">
+              <div className="preview-card__back-rakhi" aria-hidden="true">
+                {selectedRakhi?.image ? (
+                  <img src={selectedRakhi.image} alt="" className="preview-card__back-rakhi-img" />
                 ) : (
-                  <div className="preview-card__rakhi-center">
-                    <div
-                      className="preview-card__rakhi-dot"
-                      style={{ backgroundColor: selectedRakhi.accentColor }}
-                    />
+                  <div className="preview-card__back-rakhi-circle" style={{ background: selectedRakhi?.gradient }}>
+                    <div className="preview-card__back-rakhi-dot" style={{ backgroundColor: selectedRakhi?.accentColor }} />
                   </div>
                 )}
               </div>
-            ) : (
-              <div className="preview-card__rakhi-placeholder">
-                <div className="preview-card__rakhi-circle preview-card__rakhi-circle--empty">
-                  <div className="preview-card__rakhi-center">
-                    <span className="preview-card__rakhi-question">?</span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
 
-          {/* Heading */}
-          <h3 className="preview-card__heading">
-            Happy Raksha Bandhan
-          </h3>
+              <h3 className="preview-card__back-heading">
+                Happy Raksha Bandhan
+              </h3>
 
-          {/* Recipient name */}
-          <p className="preview-card__greeting">
-            {recipientName.trim()
-              ? `Dear ${recipientName.trim()},`
-              : <span className="preview-card__placeholder-text">Dear [Name],</span>
-            }
-          </p>
+              {recipientName.trim() && (
+                <p className="preview-card__back-greeting">
+                  to you, {recipientName.trim()}
+                </p>
+              )}
 
-          {/* Message */}
-          <div className="preview-card__message">
-            {message.trim() ? (
-              <p className="preview-card__message-text">{message.trim()}</p>
-            ) : (
-              <p className="preview-card__placeholder-text">
-                Your heartfelt message will appear here...
+              <p className="preview-card__back-hint">
+                This is how your letter will appear to your loved one.
               </p>
-            )}
+
+              <div className="preview-card__back-ornament" aria-hidden="true">
+                <span className="preview-card__ornament-line" />
+                <span className="preview-card__ornament-diamond" />
+                <span className="preview-card__ornament-line" />
+              </div>
+            </div>
           </div>
-
-          {/* Signature line */}
-          <div className="preview-card__signature">
-            <span className="preview-card__signature-text">With love,</span>
-            <span className="preview-card__signature-name">
-              {senderName.trim() || <span className="preview-card__placeholder-text">Your Name</span>}
-            </span>
-            <span className="preview-card__signature-line" />
-          </div>
-
-          {/* Bottom ornament */}
-          <div className="preview-card__ornament-bottom" aria-hidden="true">
-            <span className="preview-card__ornament-line" />
-            <span className="preview-card__ornament-diamond" />
-            <span className="preview-card__ornament-line" />
-          </div>
-
-
         </div>
       </div>
     </section>
