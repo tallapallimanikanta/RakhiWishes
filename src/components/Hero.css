@@ -4,21 +4,14 @@
 
 .hero {
   position: relative;
-  padding: var(--space-12) var(--space-4) var(--space-10);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4);
   text-align: center;
   overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .hero {
-    padding: var(--space-16) var(--space-6) var(--space-12);
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero {
-    padding: var(--space-20) var(--space-8) var(--space-16);
-  }
 }
 
 /* ── Decorative Orbs ── */
@@ -112,4 +105,30 @@
   .hero__subtext-break {
     display: none;
   }
+}
+
+/* ── Scroll Indicator ── */
+
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.hero__scroll-text {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.hero__scroll-arrow {
+  animation: gentleFloat 2s var(--ease-in-out) infinite;
+  opacity: 0.6;
 }
