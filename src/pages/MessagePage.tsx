@@ -6,7 +6,7 @@ import './StepPage.css'
 
 function MessagePage() {
   const navigate = useNavigate()
-  const { recipientName, message, setRecipientName, setMessage } = useCreateFlow()
+  const { recipientName, senderName, message, setRecipientName, setSenderName, setMessage } = useCreateFlow()
 
   const canProceed = recipientName.trim().length > 0 && message.trim().length > 0
 
@@ -17,8 +17,10 @@ function MessagePage() {
       <div className="container step-page__content">
         <WishForm
           recipientName={recipientName}
+          senderName={senderName}
           message={message}
           onRecipientNameChange={setRecipientName}
+          onSenderNameChange={setSenderName}
           onMessageChange={setMessage}
         />
 

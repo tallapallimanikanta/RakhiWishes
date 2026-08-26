@@ -16,12 +16,14 @@ import type { Rakhi } from './data/rakhis'
 interface CreateFlowState {
   selectedRakhi: Rakhi | null
   recipientName: string
+  senderName: string
   message: string
   isSaving: boolean
   saveError: string | null
   view: 'steps' | 'letter'
   setSelectedRakhi: (rakhi: Rakhi) => void
   setRecipientName: (name: string) => void
+  setSenderName: (name: string) => void
   setMessage: (msg: string) => void
   showLetter: () => void
   backToSteps: () => void
@@ -41,6 +43,7 @@ export function useCreateFlow() {
 function CreateFlowProvider({ children }: { children: React.ReactNode }) {
   const [selectedRakhi, setSelectedRakhi] = useState<Rakhi | null>(null)
   const [recipientName, setRecipientName] = useState('')
+  const [senderName, setSenderName] = useState('')
   const [message, setMessage] = useState('')
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
@@ -78,12 +81,14 @@ function CreateFlowProvider({ children }: { children: React.ReactNode }) {
       value={{
         selectedRakhi,
         recipientName,
+        senderName,
         message,
         isSaving,
         saveError,
         view,
         setSelectedRakhi,
         setRecipientName,
+        setSenderName,
         setMessage,
         showLetter,
         backToSteps,

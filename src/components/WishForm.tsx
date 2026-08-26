@@ -12,15 +12,19 @@ const MESSAGE_MAX_LENGTH = 500
 
 interface WishFormProps {
   recipientName: string
+  senderName: string
   message: string
   onRecipientNameChange: (value: string) => void
+  onSenderNameChange: (value: string) => void
   onMessageChange: (value: string) => void
 }
 
 function WishForm({
   recipientName,
+  senderName,
   message,
   onRecipientNameChange,
+  onSenderNameChange,
   onMessageChange,
 }: WishFormProps) {
   const [activeCategory, setActiveCategory] = useState<PresetCategory | null>(null)
@@ -110,6 +114,24 @@ To
               {nameError}
             </p>
           )}
+        </div>
+
+        {/* ── Sender Name ── */}
+        <div className="wish-form__field animate-fade-in-up delay-2">
+          <label htmlFor="sender-name" className="label">
+            From
+            <span className="label__required" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="sender-name"
+            type="text"
+            className="input input-lg"
+            placeholder="Your name"
+            value={senderName}
+            onChange={(e) => onSenderNameChange(e.target.value)}
+            autoComplete="off"
+            maxLength={NAME_MAX_LENGTH}
+          />
         </div>
 
         {/* ── Preset Messages ── */}

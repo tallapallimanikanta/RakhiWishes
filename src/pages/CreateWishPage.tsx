@@ -8,9 +8,11 @@ import './CreateWishPage.css'
 interface CreateWishPageProps {
   selectedRakhi: Rakhi | null
   recipientName: string
+  senderName: string
   message: string
   onRakhiSelect: (rakhi: Rakhi) => void
   onRecipientNameChange: (value: string) => void
+  onSenderNameChange: (value: string) => void
   onMessageChange: (value: string) => void
   onCreateWish: () => void
 }
@@ -18,9 +20,11 @@ interface CreateWishPageProps {
 function CreateWishPage({
   selectedRakhi,
   recipientName,
+  senderName,
   message,
   onRakhiSelect,
   onRecipientNameChange,
+  onSenderNameChange,
   onMessageChange,
   onCreateWish,
 }: CreateWishPageProps) {
@@ -63,8 +67,10 @@ function CreateWishPage({
         {/* Personal Message Form */}
         <WishForm
           recipientName={recipientName}
+          senderName={senderName}
           message={message}
           onRecipientNameChange={onRecipientNameChange}
+          onSenderNameChange={onSenderNameChange}
           onMessageChange={onMessageChange}
         />
 
